@@ -1,6 +1,20 @@
 {
   "version": 1,
   "projects": {
+    "api-interfaces": {
+      "root": "libs/api-interfaces",
+      "sourceRoot": "libs/api-interfaces/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/api-interfaces/**/*.ts"]
+          }
+        }
+      }
+    },
     "pokedex": {
       "projectType": "application",
       "root": "apps/pokedex",
@@ -9,9 +23,7 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/pokedex",
             "index": "apps/pokedex/src/index.html",
@@ -91,9 +103,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/pokedex"
-          ],
+          "outputs": ["coverage/apps/pokedex"],
           "options": {
             "jestConfig": "apps/pokedex/jest.config.js",
             "passWithNoTests": true
@@ -121,13 +131,9 @@
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": [
-            "{options.outputFile}"
-          ],
+          "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": [
-              "apps/pokedex-e2e/**/*.{js,ts}"
-            ]
+            "lintFilePatterns": ["apps/pokedex-e2e/**/*.{js,ts}"]
           }
         }
       }
