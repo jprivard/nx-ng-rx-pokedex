@@ -9,7 +9,9 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/pokedex",
             "index": "apps/pokedex/src/index.html",
@@ -21,7 +23,10 @@
               "apps/pokedex/src/favicon.ico",
               "apps/pokedex/src/assets"
             ],
-            "styles": ["apps/pokedex/src/styles.scss"],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "apps/pokedex/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -86,7 +91,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/pokedex"],
+          "outputs": [
+            "coverage/apps/pokedex"
+          ],
           "options": {
             "jestConfig": "apps/pokedex/jest.config.js",
             "passWithNoTests": true
@@ -114,9 +121,13 @@
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/pokedex-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/pokedex-e2e/**/*.{js,ts}"
+            ]
           }
         }
       }
