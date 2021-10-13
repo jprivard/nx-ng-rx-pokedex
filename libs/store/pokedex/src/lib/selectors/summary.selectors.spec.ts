@@ -3,7 +3,7 @@ import { ProcessStatus } from '../enums/process-status.enum';
 import { initialState, State  } from '../reducers/summary.reducer';
 import * as queries from './summary.selectors';
 
-describe('Pokemon Selectors', () => {
+describe('Summary Selectors', () => {
   describe('selectList', () => {
     test('returns the list of pokemons by ID ascending', () => {
       expect(queries.selectList.projector({ ...initialState })).toEqual([]);

@@ -8,6 +8,7 @@ import * as fromPokedex from './reducers';
 import { effects } from './effects';
 import { PokemonService } from './services/pokemon.service';
 import { PokedexFacade } from './pokedex.facade';
+import { FactoryService } from './services/factory.service';
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import { PokedexFacade } from './pokedex.facade';
     StoreModule.forFeature(fromPokedex.FEATURE_KEY, fromPokedex.reducers),
     EffectsModule.forFeature(effects)
   ],
-  providers: [ PokedexFacade, PokemonService ]
+  providers: [ PokedexFacade, PokemonService, FactoryService ]
 })
 export class StorePokedexModule {}

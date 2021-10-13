@@ -3,7 +3,7 @@ import { SummaryActions } from '../actions';
 import { ProcessStatus } from '../enums/process-status.enum';
 import { initialState, reducer } from './summary.reducer';
 
-describe('Pokemon Reducer', () => {
+describe('Summary Reducer', () => {
   describe('Load', () => {
     test('sets the process status to loading and empty the list', () => {
       const state = { ...initialState, list: [ { id: 1 } as PokemonSummary ] };
