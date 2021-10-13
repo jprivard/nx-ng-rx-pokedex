@@ -1,8 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-
 import { PokemonService } from './pokemon.service';
-import { Pokemon } from '@pokedex/api-interfaces';
 
 describe('Pokemon Service', () => {
   describe('Load', () => {

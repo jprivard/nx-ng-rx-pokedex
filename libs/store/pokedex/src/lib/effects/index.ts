@@ -1,3 +1,3 @@
-import { PokemonEffects } from './pokemon.effects';
+import { SummaryEffects } from './summary.effects';
 
-export const effects = [ PokemonEffects ];
+export const effects = [ SummaryEffects ];

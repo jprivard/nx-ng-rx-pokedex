@@ -1,1 +1,1 @@
-export * as PokemonActions from './pokemon.actions';
+export * as SummaryActions from './summary.actions';

@@ -1,7 +1,7 @@
-import { Pokemon } from '@pokedex/api-interfaces';
+import { PokemonSummary } from '@pokedex/api-interfaces';
 import { ProcessStatus } from '../enums/process-status.enum';
-import { initialState, State  } from '../reducers/pokemon.reducer';
-import * as queries from './pokemon.selectors';
+import { initialState, State  } from '../reducers/summary.reducer';
+import * as queries from './summary.selectors';
 
 describe('Pokemon Selectors', () => {
   describe('selectList', () => {
@@ -23,9 +23,9 @@ describe('Pokemon Selectors', () => {
     });
   });
 
-  const pokemons = [ { id: 2 }, { id: 3 }, { id: 1 } ] as Pokemon[];
+  const pokemons = [ { id: 2 }, { id: 3 }, { id: 1 } ] as PokemonSummary[];
 
-  const aStateContaining = (list: Pokemon[]): State =>  ({ ...initialState, list });
+  const aStateContaining = (list: PokemonSummary[]): State =>  ({ ...initialState, list });
   const aStateWithProcess = (status: ProcessStatus): State => ({ ...initialState,
     process: { ...initialState.process, status }
   })

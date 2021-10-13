@@ -2,9 +2,9 @@ import { TestBed } from "@angular/core/testing";
 import { Store } from "@ngrx/store";
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
-import { Pokemon } from "@pokedex/api-interfaces";
+import { PokemonSummary } from "@pokedex/api-interfaces";
 import { hot } from "jest-marbles";
-import { PokemonActions } from "./actions";
+import { SummaryActions } from "./actions";
 import { ProcessStatus } from "./enums/process-status.enum";
 import { PokedexFacade } from './pokedex.facade';
 import * as fromPokedex from './reducers';
@@ -14,12 +14,12 @@ describe('Pokedex Facade', () => {
     test('dispatches load action, passing down parameters', () => {
       const options = { size: 10, page: 0 };
       facade.load(options);
-      expect(dispatch).toHaveBeenCalledWith(PokemonActions.load(options));
+      expect(dispatch).toHaveBeenCalledWith(SummaryActions.load(options));
     });
 
     describe('List', () => {
       test('returns list from Store', () => {
-        const list = [ { id: 1 } ] as Pokemon[];
+        const list = [ { id: 1 } ] as PokemonSummary[];
         setStore(list);
         expect(facade.list()).toBeObservable(hot('a', { a: list }));
       });
@@ -68,12 +68,12 @@ describe('Pokedex Facade', () => {
     jest.restoreAllMocks();
   });
 
-  const setStore = (list: Pokemon[], status = ProcessStatus.completed) => {
+  const setStore = (list: PokemonSummary[], status = ProcessStatus.completed) => {
     store.setState({
       pokedex: { ...fromPokedex.initialState,
-        pokemon: { ...fromPokedex.initialState.pokemon,
+        summary: { ...fromPokedex.initialState.summary,
           list,
-          process: { ...fromPokedex.initialState.pokemon.process, status }
+          process: { ...fromPokedex.initialState.summary.process, status }
         }
       }
     });

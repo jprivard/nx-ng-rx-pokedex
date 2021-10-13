@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { Pokemon } from '@pokedex/api-interfaces';
-import { PokemonActions } from './actions';
+import { PokemonSummary } from '@pokedex/api-interfaces';
+import { SummaryActions } from './actions';
 import * as queries from "./selectors";
 
 
@@ -12,14 +12,14 @@ export class PokedexFacade {
   constructor(private store: Store) {}
 
   public load(options: { size: number, page: number }): void {
-    this.store.dispatch(PokemonActions.load(options));
+    this.store.dispatch(SummaryActions.load(options));
   }
 
-  public list(): Observable<Pokemon[]> {
-    return this.store.select(queries.pokemon.selectList);
+  public list(): Observable<PokemonSummary[]> {
+    return this.store.select(queries.summary.selectList);
   }
 
   public isLoading(): Observable<boolean> {
-    return this.store.select(queries.pokemon.selectLoading);
+    return this.store.select(queries.summary.selectLoading);
   }
 }

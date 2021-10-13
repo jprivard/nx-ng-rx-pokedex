@@ -1,1 +1,1 @@
-export * as pokemon from './pokemon.selectors';
+export * as summary from './summary.selectors';
