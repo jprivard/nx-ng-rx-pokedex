@@ -17,7 +17,7 @@ describe('Pokemon Reducer', () => {
     test('adds newly received data in the list', () => {
       const state = { ...initialState, list: [ { id: 1 } as Pokemon ] };
       const pokemon = { id: 2 } as Pokemon;
-      const result = reducer(state, PokemonActions.loaded({ pokemon }));
+      const result = reducer(state, PokemonActions.loaded({ pokemon }));
       expect(result.list.length).toEqual(2);
     });
   });
