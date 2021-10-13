@@ -137,6 +137,31 @@
           }
         }
       }
+    },
+    "store-pokedex": {
+      "projectType": "library",
+      "root": "libs/store/pokedex",
+      "sourceRoot": "libs/store/pokedex/src",
+      "prefix": "pokedex",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/store/pokedex"],
+          "options": {
+            "jestConfig": "libs/store/pokedex/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/store/pokedex/src/**/*.ts",
+              "libs/store/pokedex/src/**/*.html"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {

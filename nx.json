@@ -37,6 +37,9 @@
     "pokedex-e2e": {
       "tags": [],
       "implicitDependencies": ["pokedex"]
+    },
+    "store-pokedex": {
+      "tags": []
     }
   }
 }
