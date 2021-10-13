@@ -1,3 +1,4 @@
+import { createFeatureSelector } from '@ngrx/store';
 import * as pokemon from './pokemon.reducer';
 
 export interface PokedexModuleState {
@@ -17,5 +18,7 @@ export const reducers = {
 export const initialState: PokedexModuleState = {
   pokemon: pokemon.initialState,
 }
+
+export const getPokedexModuleState = createFeatureSelector<PokedexModuleState>(FEATURE_KEY);
 
 export { pokemon };
