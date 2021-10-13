@@ -2,6 +2,6 @@ import { createSelector } from "@ngrx/store";
 
 import * as fromModule from '../reducers/index';
 
-export const getPokemonState = createSelector(fromModule.getPokedexModuleState, state => state.pokemon);
+export const selectPokemonState = createSelector(fromModule.selectPokedexModuleState, state => state.pokemon);
 
-export const list = createSelector(getPokemonState, state => state.list);
+export const selectList = createSelector(selectPokemonState, state => state.list);

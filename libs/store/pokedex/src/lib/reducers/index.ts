@@ -19,6 +19,6 @@ export const initialState: PokedexModuleState = {
   pokemon: pokemon.initialState,
 }
 
-export const getPokedexModuleState = createFeatureSelector<PokedexModuleState>(FEATURE_KEY);
+export const selectPokedexModuleState = createFeatureSelector<PokedexModuleState>(FEATURE_KEY);
 
 export { pokemon };

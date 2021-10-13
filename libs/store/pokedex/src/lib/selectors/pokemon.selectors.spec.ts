@@ -5,8 +5,8 @@ import * as queries from './pokemon.selectors';
 describe('Pokemon Selectors', () => {
   describe('List', () => {
     test('selector getContacts should select the list of contacts', () => {
-      expect(queries.list.projector({ ...initialState })).toEqual([]);
-      expect(queries.list.projector(aStateContaining(pokemons)).length).toBe(pokemons.length);
+      expect(queries.selectList.projector({ ...initialState })).toEqual([]);
+      expect(queries.selectList.projector(aStateContaining(pokemons)).length).toBe(pokemons.length);
     });
   });
 
