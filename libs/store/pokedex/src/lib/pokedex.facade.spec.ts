@@ -18,7 +18,7 @@ describe('Pokedex Facade', () => {
 
     describe('List', () => {
       test('returns list from Store', () => {
-        const list = [ { id: 1 } ] as Pokemon[];
+        const list = [ { id: 1 } ] as Pokemon[];
         setStore(list);
         expect(facade.list()).toBeObservable(hot('a', { a: list }));
       });
