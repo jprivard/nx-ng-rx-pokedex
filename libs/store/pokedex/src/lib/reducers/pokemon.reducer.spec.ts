@@ -4,39 +4,31 @@ import { ProcessStatus } from '../enums/process-status.enum';
 import { initialState, reducer } from './pokemon.reducer';
 
 describe('Pokemon Reducer', () => {
-  describe('Initialize', () => {
-    test('resets the data and sets process status to loading', () => {
+  describe('Load', () => {
+    test('sets the process status to loading and empty the list', () => {
       const state = { ...initialState, list: [ { id: 1 } as Pokemon ] };
-      const result = reducer(state, PokemonActions.initialize());
+      const result = reducer(state, PokemonActions.load({ size: 10, page: 0 }));
       expect(result.list.length).toEqual(0);
       expect(result.process.status).toEqual(ProcessStatus.loading);
     });
   });
 
   describe('Loaded', () => {
-    test('adds newly received data in the list', () => {
-      const state = { ...initialState, list: [ { id: 1 } as Pokemon ] };
-      const pokemon = { id: 2 } as Pokemon;
-      const result = reducer(state, PokemonActions.loaded({ pokemon }));
-      expect(result.list.length).toEqual(2);
+    test('sets the new list in the store and the process status to completed', () => {
+      const list = [ { id: 1} ] as Pokemon[];
+      const result = reducer({ ...initialState }, PokemonActions.loaded({ list }));
+      expect(result.list.length).toEqual(1);
+      expect(result.process.status).toEqual(ProcessStatus.completed);
     });
   });
 
-  describe('Loaded', () => {
-    test('adds newly received data in the list', () => {
+  describe('Failed', () => {
+    test('sets the process status as failed', () => {
       const error = new Error();
       const state = { ...initialState, list: [ { id: 1 } as Pokemon ] };
       const result = reducer(state, PokemonActions.failed({ error }));
       expect(result.process.error).toEqual(error);
       expect(result.process.status).toEqual(ProcessStatus.failed);
-    });
-  });
-
-  describe('Initialized', () => {
-    test('sets the process status to completed', () => {
-      const state = { ...initialState, list: [ { id: 1 } as Pokemon ] };
-      const result = reducer(state, PokemonActions.initialized());
-      expect(result.process.status).toEqual(ProcessStatus.completed);
     });
   });
 });

@@ -20,17 +20,15 @@ export const initialState: State = {
 
 const pokemonReducer = createReducer(
   initialState,
-  on(PokemonActions.initialize, () => ({ ...initialState,
+  on(PokemonActions.load, () => ({ ...initialState,
     process: { ...initialState.process, status: ProcessStatus.loading }
   })),
-  on(PokemonActions.loaded, (state, { pokemon }) => ({ ...state,
-    list: [ ...state.list, pokemon ],
+  on(PokemonActions.loaded, (state, { list }) => ({ ...state,
+    list,
+    process: { ...initialState.process, status: ProcessStatus.completed }
   })),
   on(PokemonActions.failed, (state, { error }) => ({ ...state,
     process: { ...initialState.process, error, status: ProcessStatus.failed }
-  })),
-  on(PokemonActions.initialized, state => ({ ...state,
-    process: { ...state.process, status: ProcessStatus.completed }
   })),
 );
 

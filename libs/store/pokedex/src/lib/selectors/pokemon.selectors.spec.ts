@@ -1,16 +1,32 @@
 import { Pokemon } from '@pokedex/api-interfaces';
+import { ProcessStatus } from '../enums/process-status.enum';
 import { initialState, State  } from '../reducers/pokemon.reducer';
 import * as queries from './pokemon.selectors';
 
 describe('Pokemon Selectors', () => {
-  describe('List', () => {
-    test('selector getContacts should select the list of contacts', () => {
+  describe('selectList', () => {
+    test('returns the list of pokemons by ID ascending', () => {
       expect(queries.selectList.projector({ ...initialState })).toEqual([]);
-      expect(queries.selectList.projector(aStateContaining(pokemons)).length).toBe(pokemons.length);
+      const result = queries.selectList.projector(aStateContaining(pokemons));
+      expect(result.length).toBe(pokemons.length);
+      expect(result.map(p => p.id)).toEqual([1, 2, 3]);
     });
   });
 
-  const pokemons = [ { id: 1 } ] as Pokemon[];
+  describe('selectLoading', () => {
+    test('returns boolean if status is loading', () => {
+      expect(queries.selectLoading.projector({ ...initialState })).toEqual(false);
+      expect(queries.selectLoading.projector(aStateWithProcess(ProcessStatus.normal))).toBe(false);
+      expect(queries.selectLoading.projector(aStateWithProcess(ProcessStatus.loading))).toBe(true);
+      expect(queries.selectLoading.projector(aStateWithProcess(ProcessStatus.failed))).toBe(false);
+      expect(queries.selectLoading.projector(aStateWithProcess(ProcessStatus.completed))).toBe(false);
+    });
+  });
+
+  const pokemons = [ { id: 2 }, { id: 3 }, { id: 1 } ] as Pokemon[];
 
   const aStateContaining = (list: Pokemon[]): State =>  ({ ...initialState, list });
+  const aStateWithProcess = (status: ProcessStatus): State => ({ ...initialState,
+    process: { ...initialState.process, status }
+  })
 });

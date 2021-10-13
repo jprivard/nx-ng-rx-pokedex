@@ -1,4 +1,4 @@
 export interface Species {
-  id: number;
+  url: string;
   name: string;
 }
