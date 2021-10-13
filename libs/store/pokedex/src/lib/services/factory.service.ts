@@ -7,9 +7,14 @@ export class FactoryService {
   public toPokemonSummary(response: PokemonApiResponse): PokemonSummary {
     return {
       id: response.id,
-      name: response.name[0].toUpperCase() + response.name.substring(1),
+      url: '/pokemon/' + response.name,
+      name: this.capitalize(response.name),
       sprite: response.sprites.front_default,
-      types: response.types.map(type => type.type.name)
+      types: response.types.map(type => this.capitalize(type.type.name))
     } as PokemonSummary;
+  }
+
+  private capitalize(text: string): string {
+    return text[0].toUpperCase() + text.substring(1);
   }
 }

@@ -40,6 +40,12 @@
     },
     "store-pokedex": {
       "tags": []
+    },
+    "web-list": {
+      "tags": []
+    },
+    "web-spinner": {
+      "tags": []
     }
   }
 }

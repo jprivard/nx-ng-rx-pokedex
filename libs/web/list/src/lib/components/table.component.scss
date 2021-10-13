@@ -1,0 +1,21 @@
+
+table {
+  width: 100%;
+}
+
+.center-cropped {
+  width: 35px;
+  height: 35px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 60px;
+}
+
+.mat-column-id, .mat-column-sprite {
+  width: 50px;
+}
+
+.mat-column-name {
+  width: 170px;
+  font-size: 1.2em;
+}

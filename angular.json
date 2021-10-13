@@ -162,6 +162,56 @@
           }
         }
       }
+    },
+    "web-list": {
+      "projectType": "library",
+      "root": "libs/web/list",
+      "sourceRoot": "libs/web/list/src",
+      "prefix": "pokedex",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/list"],
+          "options": {
+            "jestConfig": "libs/web/list/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/web/list/src/**/*.ts",
+              "libs/web/list/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "web-spinner": {
+      "projectType": "library",
+      "root": "libs/web/spinner",
+      "sourceRoot": "libs/web/spinner/src",
+      "prefix": "pokedex",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/spinner"],
+          "options": {
+            "jestConfig": "libs/web/spinner/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/web/spinner/src/**/*.ts",
+              "libs/web/spinner/src/**/*.html"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {

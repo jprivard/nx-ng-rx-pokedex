@@ -1,0 +1,14 @@
+<mat-card style="margin: 10px;">
+  <mat-card-header>
+    <mat-card-title>Pokémon List</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="example-container">
+      <pokedex-spinner *ngIf="isLoading$ | async"></pokedex-spinner>
+      <div class="example-table-container">
+        <pokedex-table [pokemon]="(pokemons$ | async) || []"></pokedex-table>
+        <mat-paginator [length]="300" [pageSize]="10" (page)="load($event.pageSize, $event.pageIndex)"></mat-paginator>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

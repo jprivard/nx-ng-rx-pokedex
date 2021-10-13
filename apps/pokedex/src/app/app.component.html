@@ -1,7 +1,8 @@
 <header>
-  <h1>Welcome to {{ title }}!</h1>
+  <mat-toolbar color="primary" style="margin-bottom: 50px;">
+    <img src="/assets/img/pokedex.webp" style="width: 300px; margin-top: 30px; margin-left: auto; margin-right: auto;" />
+  </mat-toolbar>
 </header>
-<main>
-  <h2>Pokemons !</h2>
-  {{ pokemons$ | async | json }}
+<main style="max-width: 1000px; margin: auto;">
+  <router-outlet></router-outlet>
 </main>
