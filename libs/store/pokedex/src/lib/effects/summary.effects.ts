@@ -3,7 +3,7 @@ import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { forkJoin, of } from 'rxjs';
 import { map, mergeMap, catchError, exhaustMap } from 'rxjs/operators';
 
-import { PokemonSummary } from '@pokedex/api-interfaces';
+import { PokemonSummary } from '../models/pokemon-summary.interface';
 import { SummaryActions } from '../actions';
 import { PokemonService } from '../services/pokemon.service';
 

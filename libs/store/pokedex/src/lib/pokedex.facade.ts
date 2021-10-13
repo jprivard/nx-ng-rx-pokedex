@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { PokemonSummary } from '@pokedex/api-interfaces';
+import { PokemonSummary } from './models/pokemon-summary.interface';
 import { SummaryActions } from './actions';
 import * as queries from "./selectors";
 

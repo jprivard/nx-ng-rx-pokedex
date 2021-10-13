@@ -6,10 +6,10 @@ import { map, switchMap } from 'rxjs/operators';
 import {
   EvolutionChainResponseApi,
   ListApiRepsonse,
-  PokemonSummary,
   PokemonApiResponse,
   SpeciesApiResponse
 } from '@pokedex/api-interfaces';
+import { PokemonSummary } from '../models/pokemon-summary.interface';
 
 @Injectable()
 export class PokemonService {

@@ -6,7 +6,7 @@ import { hot, cold } from 'jest-marbles';
 import { SummaryEffects } from './summary.effects';
 import { PokemonService } from '../services/pokemon.service';
 import { SummaryActions } from '../actions';
-import { PokemonSummary } from '@pokedex/api-interfaces';
+import { PokemonSummary } from '../models/pokemon-summary.interface';
 
 describe('Pokemon Effects', () => {
 
