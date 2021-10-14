@@ -4,10 +4,11 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { hot } from "jest-marbles";
 
 import { PokemonSummary } from './interfaces/pokemon-summary.interface';
-import { SummaryActions } from "./actions";
+import { DetailsActions, SummaryActions } from "./actions";
 import { ProcessStatus } from "./enums/process-status.enum";
 import { PokedexFacade } from './pokedex.facade';
 import * as fromPokedex from './reducers';
+import { PokemonDetails } from "./interfaces/pokemon-details.interface";
 
 describe('Pokedex Facade', () => {
   describe('LoadList', () => {
@@ -20,49 +21,49 @@ describe('Pokedex Facade', () => {
 
   describe('LoadPokemon', () => {
     test('dispatches load action, padding down pokemon name', () => {
-      expect(true).toBeTruthy();
+      const name = 'bulbusaur';
+      facade.loadPokemon(name);
+      expect(dispatch).toHaveBeenCalledWith(DetailsActions.load({ name }));
     });
   });
 
   describe('List', () => {
     test('returns list from Store', () => {
       const list = [ { id: 1 } ] as PokemonSummary[];
-      setStore(list);
+      setSummaryStore(list);
       expect(facade.list()).toBeObservable(hot('a', { a: list }));
     });
   });
 
   describe('Pokemon', () => {
     test('returns selected pokemon information', () => {
-      expect(true).toBeTruthy();
+      const pokemon = { id: 1 } as PokemonDetails;
+      setDetailsStore(pokemon);
+      expect(facade.pokemon()).toBeObservable(hot('a', { a : pokemon }));
     });
   });
 
   describe('IsListLoading', () => {
     test('returns true when status is loading', () => {
-      setStore([], ProcessStatus.loading);
+      setSummaryStore([], ProcessStatus.loading);
       expect(facade.isListLoading()).toBeObservable(hot('a', { a: true }));
     });
 
-    test('returns false when status is normal', () => {
-      setStore([], ProcessStatus.normal);
-      expect(facade.isListLoading()).toBeObservable(hot('a', { a: false }));
-    });
-
     test('returns false when status is completed', () => {
-      setStore([], ProcessStatus.completed);
-      expect(facade.isListLoading()).toBeObservable(hot('a', { a: false }));
-    });
-
-    test('returns false when status is failed', () => {
-      setStore([], ProcessStatus.failed);
+      setSummaryStore([], ProcessStatus.completed);
       expect(facade.isListLoading()).toBeObservable(hot('a', { a: false }));
     });
   });
 
   describe('isPokemonLoading', () => {
     test('returns true when status is loading', () => {
-      expect(true).toBeTruthy();
+      setDetailsStore(null, ProcessStatus.loading);
+      expect(facade.isPokemonLoading()).toBeObservable(hot('a', { a: true }));
+    });
+
+    test('returns false when status is completed', () => {
+      setDetailsStore(null, ProcessStatus.completed);
+      expect(facade.isPokemonLoading()).toBeObservable(hot('a', { a: false }));
     });
   });
 
@@ -86,12 +87,23 @@ describe('Pokedex Facade', () => {
     jest.restoreAllMocks();
   });
 
-  const setStore = (list: PokemonSummary[], status = ProcessStatus.completed) => {
+  const setSummaryStore = (list: PokemonSummary[], status = ProcessStatus.completed) => {
     store.setState({
       pokedex: { ...fromPokedex.initialState,
         summary: { ...fromPokedex.initialState.summary,
           list,
           process: { ...fromPokedex.initialState.summary.process, status }
+        }
+      }
+    });
+  };
+
+  const setDetailsStore = (pokemon: PokemonDetails | null, status = ProcessStatus.completed) => {
+    store.setState({
+      pokedex: { ...fromPokedex.initialState,
+        details: { ...fromPokedex.initialState.details,
+          pokemon,
+          process: { ...fromPokedex.initialState.details.process, status }
         }
       }
     });

@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 
 import { PokemonSummary } from './interfaces/pokemon-summary.interface';
-import { SummaryActions } from './actions';
+import { DetailsActions, SummaryActions } from './actions';
 import * as queries from "./selectors";
 import { PokemonDetails } from './interfaces/pokemon-details.interface';
 
@@ -16,15 +16,15 @@ export class PokedexFacade {
   }
 
   public loadPokemon(name: string): void {
-    console.log(name);
+    this.store.dispatch(DetailsActions.load({ name }));
   }
 
   public list(): Observable<PokemonSummary[]> {
     return this.store.select(queries.summary.selectList);
   }
 
-  public pokemon(): Observable<PokemonDetails> {
-    return of();
+  public pokemon(): Observable<PokemonDetails | null> {
+    return this.store.select(queries.details.selectPokemon);
   }
 
   public isListLoading(): Observable<boolean> {
@@ -32,6 +32,6 @@ export class PokedexFacade {
   }
 
   public isPokemonLoading(): Observable<boolean> {
-    return of(true);
+    return this.store.select(queries.details.selectLoading);
   }
 }
