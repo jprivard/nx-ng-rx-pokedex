@@ -19,7 +19,7 @@ And then, run `webpack-bundle-analyzer dist/apps/pokedex/stats.json` to consult 
 
 ## See library dependencies
 
-Run `nx dep-graph` to see the dependencyes
+Run `nx dep-graph` to see the dependencies
 
 ## Development server
 

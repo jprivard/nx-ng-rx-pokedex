@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatTableModule } from '@angular/material/table';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { ComponentInspector } from '@pokedex/spec-helpers';
 import { pokemonSummary } from '@pokedex/store/pokedex';
@@ -50,7 +51,7 @@ describe('Table Component', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ TableComponent ],
-      imports: [ MatTableModule ],
+      imports: [ MatTableModule, RouterTestingModule.withRoutes([]) ],
     }).compileComponents();
     fixture = TestBed.createComponent(TableComponent);
     component = fixture.componentInstance;
