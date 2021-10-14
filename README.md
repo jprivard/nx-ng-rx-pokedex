@@ -12,6 +12,15 @@ Run `ng g @nrwl/angular:app my-app` to generate an application.
 
 Run `ng g @nrwl/angular:lib my-lib` to generate a library.
 
+## See file size statistics
+
+First, run `nx build --prod --stats-json` to build the projects with stats.
+And then, run `webpack-bundle-analyzer dist/apps/pokedex/stats.json` to consult the data.
+
+## See library dependencies
+
+Run `nx dep-graph` to see the dependencyes
+
 ## Development server
 
 Run `nx serve pokedex` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.

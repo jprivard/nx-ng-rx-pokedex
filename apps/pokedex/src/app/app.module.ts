@@ -6,7 +6,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
-import { StorePokedexModule } from '@pokedex/store/pokedex';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -23,7 +22,6 @@ import { AppRoutingModule } from './app-routing.module';
       logOnly: environment.production,
     }),
     AppRoutingModule,
-    StorePokedexModule,
     MatToolbarModule,
   ],
   providers: [],
