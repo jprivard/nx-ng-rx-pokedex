@@ -9,7 +9,8 @@
     "build": "nx build",
     "analyze": "nx build --prod --stats-json; webpack-bundle-analyzer ./dist/apps/pokedex/stats.json",
     "test": "nx run-many affected --target=test --all --code-coverage",
-    "coverage": "http-server ./coverage/"
+    "coverage": "http-server ./coverage/",
+    "dep-graph": "nx dep-graph"
   },
   "private": true,
   "dependencies": {
