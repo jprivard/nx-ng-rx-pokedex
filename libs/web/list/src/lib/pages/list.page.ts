@@ -12,7 +12,7 @@ import { MatPaginator } from "@angular/material/paginator";
 export class ListPage {
   displayedColumns: string[] = [ 'id', 'sprite', 'name', 'types' ];
   pokemons$: Observable<PokemonSummary[]> = this.pokedex.list();
-  isLoading$: Observable<boolean> = this.pokedex.isLoading();
+  isLoading$: Observable<boolean> = this.pokedex.isListLoading();
   @ViewChild(MatPaginator) paginator?: MatPaginator;
 
   constructor(private pokedex: PokedexFacade) {
@@ -20,6 +20,6 @@ export class ListPage {
   }
 
   public load(size: number, page: number) {
-    this.pokedex.load({ size, page });
+    this.pokedex.loadList({ size, page });
   }
 }

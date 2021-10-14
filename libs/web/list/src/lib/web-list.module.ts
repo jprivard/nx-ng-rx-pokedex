@@ -11,7 +11,8 @@ import { COMPONENTS } from './components';
 import { StorePokedexModule } from '@pokedex/store/pokedex';
 
 export const webListRoutes: Route[] = [
-  { path: '', component: ListPage }
+  { path: '', component: ListPage },
+  { path: ':id', loadChildren: () => import('@pokedex/web/entry').then((m) => m.WebEntryModule) },
 ];
 
 @NgModule({

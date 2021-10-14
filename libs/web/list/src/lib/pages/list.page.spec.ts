@@ -33,12 +33,12 @@ describe('List Page', () => {
   });
 
   it('asks the facade to load the initial page on startup', () => {
-    expect(facade.load).toHaveBeenCalledWith({ page: 0, size: 10 });
+    expect(facade.loadList).toHaveBeenCalledWith({ page: 0, size: 10 });
   });
 
   it('asks the facade to load page on paginator action', async () => {
     await (await element.paginator()).goToNextPage();
-    expect(facade.load).toHaveBeenCalledWith({ page: 1, size: 10 });
+    expect(facade.loadList).toHaveBeenCalledWith({ page: 1, size: 10 });
   });
 
   let fixture: ComponentFixture<ListPage>;
@@ -47,9 +47,9 @@ describe('List Page', () => {
   const list = new BehaviorSubject<PokemonSummary[]>([]);
   const loading = new BehaviorSubject<boolean>(false);
   const facade = {
-    load: jest.fn(),
+    loadList: jest.fn(),
     list: jest.fn().mockReturnValue(list.asObservable()),
-    isLoading: jest.fn().mockReturnValue(loading.asObservable())
+    isListLoading: jest.fn().mockReturnValue(loading.asObservable())
   };
 
   beforeEach(async () => {

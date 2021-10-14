@@ -11,15 +11,19 @@ import * as queries from "./selectors";
 export class PokedexFacade {
   constructor(private store: Store) {}
 
-  public load(options: { size: number, page: number }): void {
+  public loadList(options: { size: number, page: number }): void {
     this.store.dispatch(SummaryActions.load(options));
+  }
+
+  public loadPokemon(name: string): void {
+    console.log(name);
   }
 
   public list(): Observable<PokemonSummary[]> {
     return this.store.select(queries.summary.selectList);
   }
 
-  public isLoading(): Observable<boolean> {
+  public isListLoading(): Observable<boolean> {
     return this.store.select(queries.summary.selectLoading);
   }
 }

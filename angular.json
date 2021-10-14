@@ -150,6 +150,31 @@
         }
       }
     },
+    "web-entry": {
+      "projectType": "library",
+      "root": "libs/web/entry",
+      "sourceRoot": "libs/web/entry/src",
+      "prefix": "pokedex",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/entry"],
+          "options": {
+            "jestConfig": "libs/web/entry/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/web/entry/src/**/*.ts",
+              "libs/web/entry/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "web-list": {
       "projectType": "library",
       "root": "libs/web/list",
