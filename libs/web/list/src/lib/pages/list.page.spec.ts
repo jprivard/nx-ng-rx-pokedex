@@ -6,7 +6,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatPaginatorHarness } from '@angular/material/paginator/testing';
 
 import { ComponentInspector } from '@pokedex/spec-helpers';
-import { PokedexFacade, PokemonSummary } from '@pokedex/store/pokedex';
+import { PokedexFacade, pokemonSummary, PokemonSummary } from '@pokedex/store/pokedex';
 import { ListPage } from './list.page';
 
 describe('List Page', () => {
@@ -27,10 +27,9 @@ describe('List Page', () => {
   });
 
   it('sends the list of Pokemon to the table component', () => {
-    const pokemon = [ { id: 1 } ] as PokemonSummary[];
-    list.next(pokemon);
+    list.next(pokemonSummary);
     fixture.detectChanges();
-    expect(element.table().pokemon).toBe(pokemon);
+    expect(element.pokedexTable().pokemon).toEqual(pokemonSummary);
   });
 
   it('asks the facade to load the initial page on startup', () => {
@@ -79,6 +78,6 @@ class PokedexSpinnerComponent {}
 
 class ComponentDSL extends ComponentInspector {
   spinner = () => this.getComponent<PokedexSpinnerComponent>('pokedex-spinner', PokedexSpinnerComponent);
-  table = () => this.getComponent<PokedexTableComponent>('pokedex-table', PokedexTableComponent);
+  pokedexTable = () => this.getComponent<PokedexTableComponent>('pokedex-table', PokedexTableComponent);
   paginator = async () => await this.loader.getHarness(MatPaginatorHarness);
 }
