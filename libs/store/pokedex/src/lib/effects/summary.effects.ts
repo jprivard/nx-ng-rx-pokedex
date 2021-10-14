@@ -15,8 +15,8 @@ export class SummaryEffects {
     private factory: FactoryService
   ) {}
 
-  load$ = createEffect(() =>
-    this.actions$.pipe(
+  load$ = createEffect(() => {
+    return this.actions$.pipe(
       ofType(SummaryActions.load),
       exhaustMap(({ page, size }) =>
         this.service.load(size, page * 10).pipe(
@@ -30,6 +30,6 @@ export class SummaryEffects {
           catchError(error => of(SummaryActions.failed({ error }))),
         )
       ),
-    )
-  );
+    );
+  });
 }

@@ -3,12 +3,13 @@ import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { MatTableHarness } from '@angular/material/table/testing';
 import { UnitTestElement } from '@angular/cdk/testing/testbed';
+import { ComponentFixture } from '@angular/core/testing';
 
-export class ComponentInspector {
+export class ComponentInspector<T> {
   public fixture;
   public loader: HarnessLoader;
 
-  constructor(fixture: any) {
+  constructor(fixture: ComponentFixture<T>) {
     this.fixture = fixture;
     this.loader = TestbedHarnessEnvironment.loader(this.fixture);
   }
@@ -25,7 +26,8 @@ export class ComponentInspector {
     return this.fixture.debugElement.queryAll(By.css(selector));
   }
 
-  getComponent = <T>(selector: string, component: any, parent = this): T  => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  getComponent = <R>(selector: string, component: any, parent = this): R  => {
     const el = parent.queryAll(selector);
     return el.length > 0 ? el[0].injector.get(component) : undefined;
   }

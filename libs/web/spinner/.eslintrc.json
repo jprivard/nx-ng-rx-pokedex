@@ -3,6 +3,9 @@
   "ignorePatterns": ["!**/*"],
   "overrides": [
     {
+      "parserOptions": {
+        "project": ["libs/web/spinner/tsconfig.*?.json"]
+      },
       "files": ["*.ts"],
       "extends": [
         "plugin:@nrwl/nx/angular",

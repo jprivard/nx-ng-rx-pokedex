@@ -111,33 +111,6 @@
         }
       }
     },
-    "pokedex-e2e": {
-      "root": "apps/pokedex-e2e",
-      "sourceRoot": "apps/pokedex-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/pokedex-e2e/cypress.json",
-            "devServerTarget": "pokedex:serve:development",
-            "tsConfig": "apps/pokedex-e2e/tsconfig.json"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "pokedex:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
-          "options": {
-            "lintFilePatterns": ["apps/pokedex-e2e/**/*.{js,ts}"]
-          }
-        }
-      }
-    },
     "spec-helpers": {
       "root": "libs/spec-helpers",
       "sourceRoot": "libs/spec-helpers/src",

@@ -1,9 +1,9 @@
 import { Action, createReducer, on } from "@ngrx/store";
 
 import { PokemonSummary } from '../models/pokemon-summary.interface';
-import { SummaryActions } from "../actions";
 import { ProcessStatus } from '../enums/process-status.enum';
 import { Process } from '../interfaces/process.interface';
+import { SummaryActions } from "../actions";
 
 export interface State {
   list: PokemonSummary[];
@@ -20,6 +20,10 @@ export const initialState: State = {
 
 const summaryReducer = createReducer(
   initialState,
+  /*
+    @TODO Apparently, we need to comment everything within these lines to run the
+    lint, as there are problems with the rules that need more time to look into.
+  */
   on(SummaryActions.load, () => ({ ...initialState,
     process: { ...initialState.process, status: ProcessStatus.loading }
   })),
@@ -29,7 +33,8 @@ const summaryReducer = createReducer(
   })),
   on(SummaryActions.failed, (state, { error }) => ({ ...state,
     process: { ...initialState.process, error, status: ProcessStatus.failed }
-  })),
+  }))
+  /* End of Comment for linting */
 );
 
 export function reducer(state: State | undefined, action: Action) {

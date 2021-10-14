@@ -1,4 +1,5 @@
 import { provideMockActions } from '@ngrx/effects/testing';
+import { Action } from '@ngrx/store';
 import { TestBed } from '@angular/core/testing';
 import { Observable, of, throwError } from 'rxjs';
 import { hot, cold } from 'jest-marbles';
@@ -47,7 +48,7 @@ describe('Summary Effects', () => {
     });
   });
 
-  let actions: Observable<any>;
+  let actions = new Observable<Action>();
   let effects: SummaryEffects;
   const service = { load: jest.fn(), getPokemonSummary: jest.fn() };
   const factory = { toPokemonSummary: jest.fn() }

@@ -43,10 +43,10 @@ describe('List Page', () => {
 
   let fixture: ComponentFixture<ListPage>;
   let component: ListPage;
-  let element: ComponentDSL;
-  let list = new BehaviorSubject<PokemonSummary[]>([]);
-  let loading = new BehaviorSubject<boolean>(false);
-  let facade = {
+  let element: ComponentDSL<ListPage>;
+  const list = new BehaviorSubject<PokemonSummary[]>([]);
+  const loading = new BehaviorSubject<boolean>(false);
+  const facade = {
     load: jest.fn(),
     list: jest.fn().mockReturnValue(list.asObservable()),
     isLoading: jest.fn().mockReturnValue(loading.asObservable())
@@ -60,7 +60,7 @@ describe('List Page', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(ListPage);
     component = fixture.componentInstance;
-    element = new ComponentDSL(fixture);
+    element = new ComponentDSL<ListPage>(fixture);
   });
 
   afterAll(() => {
@@ -76,7 +76,7 @@ class PokedexTableComponent {
 @Component({ selector: 'pokedex-spinner' })
 class PokedexSpinnerComponent {}
 
-class ComponentDSL extends ComponentInspector {
+class ComponentDSL<T> extends ComponentInspector<T> {
   spinner = () => this.getComponent<PokedexSpinnerComponent>('pokedex-spinner', PokedexSpinnerComponent);
   pokedexTable = () => this.getComponent<PokedexTableComponent>('pokedex-table', PokedexTableComponent);
   paginator = async () => await this.loader.getHarness(MatPaginatorHarness);

@@ -15,7 +15,7 @@ describe('Summary Reducer', () => {
 
   describe('Loaded', () => {
     test('sets the new list in the store and the process status to completed', () => {
-      const list = [ { id: 1} ] as PokemonSummary[];
+      const list = [ { id: 1} ] as PokemonSummary[];
       const result = reducer({ ...initialState }, SummaryActions.loaded({ list }));
       expect(result.list.length).toEqual(1);
       expect(result.process.status).toEqual(ProcessStatus.completed);

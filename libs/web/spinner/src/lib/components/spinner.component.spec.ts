@@ -13,7 +13,7 @@ describe('Spinner Component', () => {
 
   let fixture: ComponentFixture<SpinnerComponent>;
   let component: SpinnerComponent;
-  let element: ComponentDSL;
+  let element: ComponentDSL<SpinnerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -21,7 +21,7 @@ describe('Spinner Component', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(SpinnerComponent);
     component = fixture.componentInstance;
-    element = new ComponentDSL(fixture);
+    element = new ComponentDSL<SpinnerComponent>(fixture);
   });
 
   afterAll(() => {
@@ -29,6 +29,6 @@ describe('Spinner Component', () => {
   });
 });
 
-class ComponentDSL extends ComponentInspector {
-  spinner = () => this.element('.pokeball .pokeball__button');
+class ComponentDSL<T> extends ComponentInspector<T> {
+  spinner = () => this.element('.pokeball .pokeball__button');
 }

@@ -9,7 +9,6 @@ import {
   PokemonApiResponse,
   SpeciesApiResponse
 } from '@pokedex/api-interfaces';
-import { PokemonSummary } from '../models/pokemon-summary.interface';
 
 @Injectable()
 export class PokemonService {
@@ -23,11 +22,12 @@ export class PokemonService {
     return this.http.get<PokemonApiResponse>(url);
   }
 
-  public getPokemonDetails(id: number): Observable<PokemonSummary> {
+  public getPokemonDetails(id: number): Observable<PokemonApiResponse> {
     return this.http.get<PokemonApiResponse>(`https://pokeapi.co/api/v2/pokemon/${ id }/`).pipe(
       switchMap(pokemon => this.http.get<SpeciesApiResponse>(pokemon.species.url).pipe(
         switchMap(species => this.http.get<EvolutionChainResponseApi>(species.evolution_chain.url).pipe(
-          map(chain => pokemon as any as PokemonSummary)
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          map(chain => pokemon)
         ))
       ))
     );

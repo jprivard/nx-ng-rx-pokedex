@@ -3,5 +3,5 @@ export interface PokemonSummary {
   name: string;
   url: string;
   sprite: string;
-  types: any[];
+  types: string[];
 }

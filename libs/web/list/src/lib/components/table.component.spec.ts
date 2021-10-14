@@ -45,7 +45,7 @@ describe('Table Component', () => {
 
   let fixture: ComponentFixture<TableComponent>;
   let component: TableComponent;
-  let element: ComponentDSL;
+  let element: ComponentDSL<TableComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -54,7 +54,7 @@ describe('Table Component', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(TableComponent);
     component = fixture.componentInstance;
-    element = new ComponentDSL(fixture);
+    element = new ComponentDSL<TableComponent>(fixture);
   });
 
   afterAll(() => {
@@ -62,7 +62,7 @@ describe('Table Component', () => {
   });
 });
 
-class ComponentDSL extends ComponentInspector {
+class ComponentDSL<T> extends ComponentInspector<T> {
   spriteOfRow = async (row: number) => (await this.host(row, 1)).element.querySelector('.center-cropped')?.getAttribute('style');
   linkOfRow = async (row: number) => await (await this.host(row, 2)).element.querySelector('a');
 }

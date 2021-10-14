@@ -3,6 +3,9 @@
   "ignorePatterns": ["!**/*"],
   "overrides": [
     {
+      "parserOptions": {
+        "project": ["libs/spec-helpers/tsconfig.*?.json"]
+      },
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {}
     },

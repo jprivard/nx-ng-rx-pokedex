@@ -25,7 +25,7 @@ describe('Pokedex Facade', () => {
       });
     });
 
-    describe('IsLoading', () => {
+    describe('IsLoading', () => {
       test('returns true when status is loading', () => {
         setStore([], ProcessStatus.loading);
         expect(facade.isLoading()).toBeObservable(hot('a', { a: true }));

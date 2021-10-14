@@ -3,6 +3,9 @@
   "ignorePatterns": ["!**/*"],
   "overrides": [
     {
+      "parserOptions": {
+        "project": ["libs/store/pokedex/tsconfig.*?.json"]
+      },
       "files": ["*.ts"],
       "extends": [
         "plugin:@nrwl/nx/angular",
