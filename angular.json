@@ -138,6 +138,20 @@
         }
       }
     },
+    "spec-helpers": {
+      "root": "libs/spec-helpers",
+      "sourceRoot": "libs/spec-helpers/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/spec-helpers/**/*.ts"]
+          }
+        }
+      }
+    },
     "store-pokedex": {
       "projectType": "library",
       "root": "libs/store/pokedex",

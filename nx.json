@@ -38,6 +38,9 @@
       "tags": [],
       "implicitDependencies": ["pokedex"]
     },
+    "spec-helpers": {
+      "tags": []
+    },
     "store-pokedex": {
       "tags": []
     },

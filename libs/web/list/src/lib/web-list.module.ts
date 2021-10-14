@@ -8,6 +8,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { WebSpinnerModule } from '@pokedex/web/spinner';
 import { COMPONENTS } from './components';
+import { StorePokedexModule } from '@pokedex/store/pokedex';
 
 export const webListRoutes: Route[] = [
   { path: '', component: ListPage }
@@ -23,6 +24,7 @@ export const webListRoutes: Route[] = [
     MatCardModule,
     RouterModule.forChild(webListRoutes),
     WebSpinnerModule,
+    StorePokedexModule,
   ],
 })
 export class WebListModule {}

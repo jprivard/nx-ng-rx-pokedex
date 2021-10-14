@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@pokedex/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@pokedex/spec-helpers": ["libs/spec-helpers/src/index.ts"],
       "@pokedex/store/pokedex": ["libs/store/pokedex/src/index.ts"],
       "@pokedex/web/list": ["libs/web/list/src/index.ts"],
       "@pokedex/web/spinner": ["libs/web/spinner/src/index.ts"]
