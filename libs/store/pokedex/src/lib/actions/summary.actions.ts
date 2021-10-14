@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { PokemonSummary } from '../models/pokemon-summary.interface';
+import { PokemonSummary } from '../interfaces/pokemon-summary.interface';
 
 export const load = createAction('[Pokemon] Page Load', props<{ size: number, page: number }>());
 export const loaded = createAction('[Pokemon] Page Loaded', props<{ list: PokemonSummary[] }>());

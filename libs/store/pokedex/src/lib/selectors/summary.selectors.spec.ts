@@ -1,4 +1,4 @@
-import { PokemonSummary } from '../models/pokemon-summary.interface';
+import { PokemonSummary } from '../interfaces/pokemon-summary.interface';
 import { ProcessStatus } from '../enums/process-status.enum';
 import { initialState, State  } from '../reducers/summary.reducer';
 import * as queries from './summary.selectors';

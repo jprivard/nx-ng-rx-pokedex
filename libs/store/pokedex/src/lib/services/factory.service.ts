@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { PokemonApiResponse } from '@pokedex/api-interfaces';
-import { PokemonSummary } from '../models/pokemon-summary.interface';
+import { PokemonSummary } from '../interfaces/pokemon-summary.interface';
 
 @Injectable()
 export class FactoryService {

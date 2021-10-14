@@ -1,4 +1,4 @@
-import { PokemonSummary } from '../models/pokemon-summary.interface';
+import { PokemonSummary } from '../interfaces/pokemon-summary.interface';
 
 export const pokemonSummary = [
   { id: 1, name: 'Bulbusaur', url: '/pokemon/bulbusaur', sprite: 'http://img/1', types: ['Grass', 'Poison'] },

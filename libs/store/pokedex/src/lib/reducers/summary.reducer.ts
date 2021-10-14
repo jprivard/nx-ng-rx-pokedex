@@ -1,6 +1,6 @@
 import { Action, createReducer, on } from "@ngrx/store";
 
-import { PokemonSummary } from '../models/pokemon-summary.interface';
+import { PokemonSummary } from '../interfaces/pokemon-summary.interface';
 import { ProcessStatus } from '../enums/process-status.enum';
 import { Process } from '../interfaces/process.interface';
 import { SummaryActions } from "../actions";
