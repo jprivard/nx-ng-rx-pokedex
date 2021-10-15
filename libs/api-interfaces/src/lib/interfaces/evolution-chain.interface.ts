@@ -3,7 +3,7 @@ export interface EvolutionChain {
     name: string;
     url: string;
   }
-  evolve_to: EvolutionChain;
+  evolves_to: EvolutionChain[];
 }
 
 export interface EvolutionChainApiResponse {

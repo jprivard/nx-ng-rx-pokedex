@@ -1,5 +1,18 @@
+export interface PokemonStat {
+  base_stat: number;
+  stat: {
+    name: string;
+  }
+}
+
 export interface PokemonApiResponse {
   id: number;
+  abilities: {
+    ability: {
+      name: string;
+    }
+  }[];
+  base_experience: number;
   name: string;
   species: {
     url: string;
@@ -15,6 +28,7 @@ export interface PokemonApiResponse {
     front_default: string;
     front_shiny: string;
   };
+  stats: PokemonStat[];
   types: {
     slot: number;
     type: {
