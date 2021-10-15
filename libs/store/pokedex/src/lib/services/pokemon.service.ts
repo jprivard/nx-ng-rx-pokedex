@@ -22,8 +22,8 @@ export class PokemonService {
     return this.http.get<PokemonApiResponse>(url);
   }
 
-  public getPokemonDetails(id: number): Observable<PokemonApiResponse> {
-    return this.http.get<PokemonApiResponse>(`https://pokeapi.co/api/v2/pokemon/${ id }/`).pipe(
+  public getPokemonDetails(name: string): Observable<PokemonApiResponse> {
+    return this.http.get<PokemonApiResponse>(`https://pokeapi.co/api/v2/pokemon/${ name }/`).pipe(
       switchMap(pokemon => this.http.get<SpeciesApiResponse>(pokemon.species.url).pipe(
         switchMap(species => this.http.get<EvolutionChainResponseApi>(species.evolution_chain.url).pipe(
           // eslint-disable-next-line @typescript-eslint/no-unused-vars

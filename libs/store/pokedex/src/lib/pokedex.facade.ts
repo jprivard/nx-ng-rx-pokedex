@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { PokemonSummary } from './interfaces/pokemon-summary.interface';
 import { DetailsActions, SummaryActions } from './actions';

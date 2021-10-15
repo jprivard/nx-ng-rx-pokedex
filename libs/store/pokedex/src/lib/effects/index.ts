@@ -1,3 +1,4 @@
+import { DetailsEffects } from './details.effects';
 import { SummaryEffects } from './summary.effects';
 
-export const effects = [ SummaryEffects ];
+export const effects = [ SummaryEffects, DetailsEffects ];
