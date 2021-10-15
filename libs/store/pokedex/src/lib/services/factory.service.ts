@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { PokemonApiResponse } from '@pokedex/api-interfaces';
+import { EvolutionChainApiResponse, PokemonApiResponse, SpeciesApiResponse } from '@pokedex/api-interfaces';
+import { PokemonDetails } from '../interfaces/pokemon-details.interface';
 import { PokemonSummary } from '../interfaces/pokemon-summary.interface';
 
 @Injectable()
@@ -12,6 +13,15 @@ export class FactoryService {
       sprite: response.sprites.front_default,
       types: response.types.map(type => this.capitalize(type.type.name))
     } as PokemonSummary;
+  }
+
+  public toPokemonDetails(
+    pokemon: PokemonApiResponse,
+    species: SpeciesApiResponse,
+    chain: EvolutionChainApiResponse
+  ): PokemonDetails {
+    console.log(pokemon, species, chain);
+    return pokemon as PokemonDetails;
   }
 
   private capitalize(text: string): string {

@@ -5,15 +5,10 @@ import { map, mergeMap, catchError, exhaustMap } from 'rxjs/operators';
 
 import { SummaryActions } from '../actions';
 import { PokemonService } from '../services/pokemon.service';
-import { FactoryService } from '../services/factory.service';
 
 @Injectable()
 export class SummaryEffects {
-  constructor(
-    private actions$: Actions,
-    private service: PokemonService,
-    private factory: FactoryService
-  ) {}
+  constructor(private actions$: Actions, private service: PokemonService) {}
 
   load$ = createEffect(() => {
     return this.actions$.pipe(
@@ -25,7 +20,6 @@ export class SummaryEffects {
               catchError(error => throwError(error))
             )
           ))),
-          map(list => list.map(response => this.factory.toPokemonSummary(response))),
           map(list => SummaryActions.loaded({ list })),
           catchError(error => of(SummaryActions.failed({ error }))),
         )

@@ -4,7 +4,6 @@ import { TestBed } from '@angular/core/testing';
 import { Observable, of, throwError } from 'rxjs';
 import { hot, cold } from 'jest-marbles';
 
-import { fixture } from '@pokedex/api-interfaces';
 import { DetailsEffects } from './details.effects';
 import { PokemonService } from '../services/pokemon.service';
 import { DetailsActions } from '../actions';

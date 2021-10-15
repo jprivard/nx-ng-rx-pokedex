@@ -6,7 +6,7 @@ export interface EvolutionChain {
   evolve_to: EvolutionChain;
 }
 
-export interface EvolutionChainResponseApi {
+export interface EvolutionChainApiResponse {
   id: number;
   chain: EvolutionChain;
 }

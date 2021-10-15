@@ -9,22 +9,16 @@ import { SummaryEffects } from './summary.effects';
 import { PokemonService } from '../services/pokemon.service';
 import { SummaryActions } from '../actions';
 import { pokemonSummary } from '../fixtures/pokemon-summary.fixture';
-import { FactoryService } from '../services/factory.service';
 
 describe('Summary Effects', () => {
-
   describe('Load', () => {
     test('calls the service to get list, individual items and factory to return PokemonSummary[]', () => {
       service.load
         .mockReturnValue(of(fixture.list));
       service.getPokemonSummary
-        .mockReturnValueOnce(of(fixture.pokemon[0]))
-        .mockReturnValueOnce(of(fixture.pokemon[1]))
-        .mockReturnValueOnce(of(fixture.pokemon[2]));
-      factory.toPokemonSummary
-        .mockReturnValueOnce(pokemonSummary[0])
-        .mockReturnValueOnce(pokemonSummary[1])
-        .mockReturnValueOnce(pokemonSummary[2]);
+        .mockReturnValueOnce(of(pokemonSummary[0]))
+        .mockReturnValueOnce(of(pokemonSummary[1]))
+        .mockReturnValueOnce(of(pokemonSummary[2]));
       actions = hot('--a-', { a: SummaryActions.load({ size: 10, page: 0 }) });
       const expected = cold('--b', { b: SummaryActions.loaded({ list: pokemonSummary }) })
       expect(effects.load$).toBeObservable(expected);
@@ -51,7 +45,6 @@ describe('Summary Effects', () => {
   let actions = new Observable<Action>();
   let effects: SummaryEffects;
   const service = { load: jest.fn(), getPokemonSummary: jest.fn() };
-  const factory = { toPokemonSummary: jest.fn() }
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -59,7 +52,6 @@ describe('Summary Effects', () => {
         SummaryEffects,
         provideMockActions(() => actions),
         { provide: PokemonService, useValue: service },
-        { provide: FactoryService, useValue: factory }
       ]
     });
     effects = TestBed.inject(SummaryEffects);
