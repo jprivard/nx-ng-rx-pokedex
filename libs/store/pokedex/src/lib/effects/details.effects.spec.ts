@@ -15,7 +15,7 @@ describe('Details Effects', () => {
     test('calls the service to get PokemonDetail, dispatches loaded', () => {
       const pokemon = { id: 1 } as PokemonDetails;
       service.getPokemonDetails.mockReturnValue(of(pokemon));
-      actions = hot('--a-', { a: DetailsActions.load({ name: 'bulbusaur' }) });
+      actions = hot('--a-', { a: DetailsActions.load({ name: 'bulbasaur' }) });
       const expected = cold('--b', { b: DetailsActions.loaded({ pokemon }) })
       expect(effects.load$).toBeObservable(expected);
     });
@@ -23,7 +23,7 @@ describe('Details Effects', () => {
     test('dispatches failed when call throws exception', () => {
       const error = new Error('error');
       service.getPokemonDetails.mockReturnValue(throwError(error));
-      actions = hot('--a-', { a: DetailsActions.load({ name: 'bulbusaur' }) });
+      actions = hot('--a-', { a: DetailsActions.load({ name: 'bulbasaur' }) });
       const expected = cold('--b', { b: DetailsActions.failed({ error }) })
       expect(effects.load$).toBeObservable(expected);
     });

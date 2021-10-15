@@ -3,7 +3,7 @@ import { MatTableModule } from '@angular/material/table';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { ComponentInspector } from '@pokedex/spec-helpers';
-import { pokemonSummary } from '@pokedex/store/pokedex';
+import { fixtures } from '@pokedex/store/pokedex';
 import { TableComponent } from './table.component';
 
 describe('Table Component', () => {
@@ -12,7 +12,7 @@ describe('Table Component', () => {
   });
 
   it('displays data', async () => {
-    component.pokemon = pokemonSummary;
+    component.pokemon = fixtures.summary;
     fixture.detectChanges();
     const content = await (await element.table()).getCellTextByColumnName();
     expect(content.id.headerText).toEqual([ '#' ]);
@@ -20,13 +20,13 @@ describe('Table Component', () => {
     expect(content.sprite.headerText).toEqual([ '' ]);
     expect(content.sprite.text).toEqual([ '', '', '' ]);
     expect(content.name.headerText).toEqual([ 'Name' ]);
-    expect(content.name.text).toEqual([ 'Bulbusaur', 'Ivysaur', 'Venusaur' ]);
+    expect(content.name.text).toEqual([ 'Bulbasaur', 'Ivysaur', 'Venusaur' ]);
     expect(content.types.headerText).toEqual([ 'Type(s)' ]);
     expect(content.types.text).toEqual([ 'Grass/Poison', 'Grass/Poison', 'Grass/Poison' ]);
   });
 
   it('contains images in Sprite column', async () => {
-    component.pokemon = pokemonSummary;
+    component.pokemon = fixtures.summary;
     fixture.detectChanges();
     expect((await element.spriteOfRow(0))).toContain('background-image: url(http://img/1);');
     expect((await element.spriteOfRow(1))).toContain('background-image: url(http://img/2);');
@@ -34,10 +34,10 @@ describe('Table Component', () => {
   });
 
   it('contains a link to specific pokemon page in name column', async () => {
-    component.pokemon = pokemonSummary;
+    component.pokemon = fixtures.summary;
     fixture.detectChanges();
-    expect((await element.linkOfRow(0))?.getAttribute('href')).toEqual('/pokemon/bulbusaur');
-    expect((await element.linkOfRow(0))?.innerHTML).toEqual('Bulbusaur');
+    expect((await element.linkOfRow(0))?.getAttribute('href')).toEqual('/pokemon/bulbasaur');
+    expect((await element.linkOfRow(0))?.innerHTML).toEqual('Bulbasaur');
     expect((await element.linkOfRow(1))?.getAttribute('href')).toEqual('/pokemon/ivysaur');
     expect((await element.linkOfRow(1))?.innerHTML).toEqual('Ivysaur');
     expect((await element.linkOfRow(2))?.getAttribute('href')).toEqual('/pokemon/venusaur');

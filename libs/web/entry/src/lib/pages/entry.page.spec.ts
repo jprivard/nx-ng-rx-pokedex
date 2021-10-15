@@ -34,7 +34,7 @@ describe('Entry Page', () => {
   });
 
   it('asks the facade to load the details on startup', () => {
-    expect(facade.loadPokemon).toHaveBeenCalledWith('bulbusaur');
+    expect(facade.loadPokemon).toHaveBeenCalledWith('bulbasaur');
   });
 
   let fixture: ComponentFixture<EntryPage>;
@@ -54,7 +54,7 @@ describe('Entry Page', () => {
       imports: [ MatCardModule ],
       providers: [
         { provide: PokedexFacade, useValue: facade },
-        { provide: ActivatedRoute, useValue: { params: of({ id: 'bulbusaur' }) } },
+        { provide: ActivatedRoute, useValue: { params: of({ id: 'bulbasaur' }) } },
       ]
     }).compileComponents();
     fixture = TestBed.createComponent(EntryPage);

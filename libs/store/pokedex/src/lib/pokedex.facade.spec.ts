@@ -21,7 +21,7 @@ describe('Pokedex Facade', () => {
 
   describe('LoadPokemon', () => {
     test('dispatches load action, padding down pokemon name', () => {
-      const name = 'bulbusaur';
+      const name = 'bulbasaur';
       facade.loadPokemon(name);
       expect(dispatch).toHaveBeenCalledWith(DetailsActions.load({ name }));
     });

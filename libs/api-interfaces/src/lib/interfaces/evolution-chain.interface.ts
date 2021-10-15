@@ -1,7 +1,7 @@
 export interface EvolutionChain {
   species: {
     name: string;
-    url: string;
+    url?: string;
   }
   evolves_to: EvolutionChain[];
 }

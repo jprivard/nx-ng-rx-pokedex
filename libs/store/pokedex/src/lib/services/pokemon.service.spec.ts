@@ -20,7 +20,7 @@ describe('Pokemon Service', () => {
 
   describe('GetPokemonSummary', () => {
     test('returns PokemonSummary', (done) => {
-      const url = 'http://pokeapi.co/api/v2/pokemon/bulbusaur';
+      const url = 'http://pokeapi.co/api/v2/pokemon/bulbasaur';
       const response = fixture.pokemon[0];
       factory.toPokemonSummary.mockReturnValue(pokemonSummary[0]);
       service.getPokemonSummary(url).subscribe(value => {
@@ -35,14 +35,14 @@ describe('Pokemon Service', () => {
   describe('getPokemonDetails', () => {
     test('returns PokemonDetails', (done) => {
       const pokemon = { id: 1 } as PokemonDetails;
-      const url1 = 'https://pokeapi.co/api/v2/pokemon/bulbusaur/';
+      const url1 = 'https://pokeapi.co/api/v2/pokemon/bulbasaur/';
       const response1 = fixture.pokemon[0];
-      const url2 = 'http://species.url/bulbusaur';
+      const url2 = 'http://species.url/bulbasaur';
       const response2 = fixture.species[0];
-      const url3 = 'http://evochain.url/bulbusaur';
+      const url3 = 'http://evochain.url/bulbasaur';
       const response3 = fixture.chain[0];
       factory.toPokemonDetails.mockReturnValue(pokemon);
-      service.getPokemonDetails('bulbusaur').subscribe(value => {
+      service.getPokemonDetails('bulbasaur').subscribe(value => {
         expect(value).toEqual(pokemon);
         expect(factory.toPokemonDetails).toHaveBeenCalledWith(response1, response2, response3);
         done();
