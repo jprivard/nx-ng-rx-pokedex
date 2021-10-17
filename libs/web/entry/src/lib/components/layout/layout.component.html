@@ -1,0 +1,22 @@
+<div>
+  <pokedex-quote [quotes]="pokemon!.flavor_text_entries"></pokedex-quote>
+  <pokedex-stats [pokemon]="pokemon!"></pokedex-stats>
+</div>
+<div class="card">
+  <img [src]="pokemon!.sprite"/>
+  <div class="types">
+    <div class="title">Types</div>
+    <pokedex-types [types]="pokemon!.types"></pokedex-types>
+  </div>
+  <div class="abilities">
+    <div class="title">Abilities</div>
+    <pokedex-abilities [abilities]="pokemon!.abilities"></pokedex-abilities>
+  </div>
+  <div class="chain">
+    <div class="title">Evolution Chain</div>
+    <pokedex-evo-species class="first"
+      [current]="pokemon!.name"
+      [chain]="pokemon!.evolution_chain"
+    ></pokedex-evo-species>
+  </div>
+</div>

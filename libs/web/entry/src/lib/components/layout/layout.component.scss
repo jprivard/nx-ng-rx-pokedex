@@ -1,0 +1,39 @@
+:host {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+
+  & > div {
+    margin: 20px;
+  }
+
+  & > div:nth-of-type(1) {
+    flex: 1;
+  }
+
+  & > div:nth-of-type(2) {
+    width: 320px;
+  }
+}
+
+.card {
+  background-color: rgb(247, 247, 247);
+  border-radius: 0.5em;
+  text-align: center;
+}
+
+.title {
+  padding: 5px;
+  background: lightgray;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 750px) {
+  :host {
+    flex-direction: column-reverse;
+    & > div:nth-of-type(2) {
+      flex: 1;
+      width: 90%;
+    }
+  }
+}
