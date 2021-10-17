@@ -4,7 +4,7 @@
   "overrides": [
     {
       "parserOptions": {
-        "project": ["apps/pokedex/tsconfig.*?.json"]
+        "project": ["libs/web/entry/tsconfig.*?.json"]
       },
       "files": ["*.ts"],
       "extends": [
