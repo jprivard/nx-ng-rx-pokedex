@@ -1,0 +1,12 @@
+<mat-card-header>
+  <mat-card-title>
+    <span class="name">
+      <span *ngIf="pokemon">
+        {{ '#' + pokemon!.id + ' ' + (pokemon!.name | titlecase) }}
+      </span>
+    </span>
+    <span class="back">
+      <a routerLink="/pokemon">To list</a>
+    </span>
+  </mat-card-title>
+</mat-card-header>
