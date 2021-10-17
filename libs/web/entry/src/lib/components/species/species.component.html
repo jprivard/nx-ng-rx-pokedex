@@ -1,0 +1,16 @@
+<div>
+  <mat-icon>{{ !first ? 'subdirectory_arrow_right' : '' }}</mat-icon>
+  <a *ngIf="current !== chain!.species.name"
+    [routerLink]="'/pokemon/' + chain!.species.name"
+  >{{ chain!.species.name | titlecase }}</a>
+  <span *ngIf="current === chain!.species.name" class="name">
+    {{ chain!.species.name | titlecase }}
+  </span>
+</div>
+<div class="indent">
+  <pokedex-evo-species *ngFor="let child of chain!.evolves_to"
+    [first]="false"
+    [chain]="child"
+    [current]="current"
+  ></pokedex-evo-species>
+</div>

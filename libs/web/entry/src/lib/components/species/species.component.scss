@@ -1,0 +1,22 @@
+:host.first {
+  display: block;
+  min-width: 200px;
+  width: fit-content;
+  text-align: left;
+  margin:auto;
+  border: 1px solid lightgray;
+  border-radius: 0.5em;
+  padding: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+mat-icon {
+  vertical-align: middle;
+  font-size: 18px;
+  text-align: right;
+}
+
+div.indent {
+  margin-left: 20px;
+}
