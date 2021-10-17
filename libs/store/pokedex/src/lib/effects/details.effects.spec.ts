@@ -12,7 +12,7 @@ import { PokemonDetails } from '../interfaces/pokemon-details.interface';
 describe('Details Effects', () => {
 
   describe('Load', () => {
-    test('calls the service to get PokemonDetail, dispatches loaded', () => {
+    it('calls the service to get PokemonDetail, dispatches loaded', () => {
       const pokemon = { id: 1 } as PokemonDetails;
       service.getPokemonDetails.mockReturnValue(of(pokemon));
       actions = hot('--a-', { a: DetailsActions.load({ name: 'bulbasaur' }) });
@@ -20,7 +20,7 @@ describe('Details Effects', () => {
       expect(effects.load$).toBeObservable(expected);
     });
 
-    test('dispatches failed when call throws exception', () => {
+    it('dispatches failed when call throws exception', () => {
       const error = new Error('error');
       service.getPokemonDetails.mockReturnValue(throwError(error));
       actions = hot('--a-', { a: DetailsActions.load({ name: 'bulbasaur' }) });

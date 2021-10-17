@@ -5,7 +5,7 @@ import { initialState, reducer } from './details.reducer';
 
 describe('Details Reducer', () => {
   describe('Load', () => {
-    test('sets the process status to loading and empty pokemon', () => {
+    it('sets the process status to loading and empty pokemon', () => {
       const state = { ...initialState, pokemon: { id: 1 } as PokemonDetails };
       const result = reducer(state, DetailsActions.load({ name: 'bulbisaur' }));
       expect(result.pokemon).toEqual(null);
@@ -14,7 +14,7 @@ describe('Details Reducer', () => {
   });
 
   describe('Loaded', () => {
-    test('sets the loaded pokemon in the store and the process status to completed', () => {
+    it('sets the loaded pokemon in the store and the process status to completed', () => {
       const pokemon = { id: 1 } as PokemonDetails;
       const result = reducer({ ...initialState }, DetailsActions.loaded({ pokemon }));
       expect(result.pokemon).toEqual(pokemon);
@@ -23,7 +23,7 @@ describe('Details Reducer', () => {
   });
 
   describe('Failed', () => {
-    test('sets the process status as failed', () => {
+    it('sets the process status as failed', () => {
       const error = new Error();
       const state = { ...initialState, pokemon: { id: 1 } as PokemonDetails };
       const result = reducer(state, DetailsActions.failed({ error }));

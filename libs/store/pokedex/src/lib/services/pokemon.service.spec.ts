@@ -8,7 +8,7 @@ import { PokemonDetails } from '../interfaces/pokemon-details.interface';
 
 describe('Pokemon Service', () => {
   describe('Load', () => {
-    test('makes the initial call returning the pokemons to load', (done) => {
+    it('makes the initial call returning the pokemons to load', (done) => {
       const response = fixture.list
       service.load(10, 0).subscribe(value => {
         expect(value).toEqual(response);
@@ -19,7 +19,7 @@ describe('Pokemon Service', () => {
   });
 
   describe('GetPokemonSummary', () => {
-    test('returns PokemonSummary', (done) => {
+    it('returns PokemonSummary', (done) => {
       const url = 'http://pokeapi.co/api/v2/pokemon/bulbasaur';
       const response = fixture.pokemon[0];
       factory.toPokemonSummary.mockReturnValue(pokemonSummary[0]);
@@ -33,7 +33,7 @@ describe('Pokemon Service', () => {
   });
 
   describe('getPokemonDetails', () => {
-    test('returns PokemonDetails', (done) => {
+    it('returns PokemonDetails', (done) => {
       const pokemon = { id: 1 } as PokemonDetails;
       const url1 = 'https://pokeapi.co/api/v2/pokemon/bulbasaur/';
       const response1 = fixture.pokemon[0];

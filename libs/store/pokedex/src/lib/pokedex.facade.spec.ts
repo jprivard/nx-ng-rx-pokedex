@@ -12,7 +12,7 @@ import { PokemonDetails } from "./interfaces/pokemon-details.interface";
 
 describe('Pokedex Facade', () => {
   describe('LoadList', () => {
-    test('dispatches load action, passing down parameters', () => {
+    it('dispatches load action, passing down parameters', () => {
       const options = { size: 10, page: 0 };
       facade.loadList(options);
       expect(dispatch).toHaveBeenCalledWith(SummaryActions.load(options));
@@ -20,7 +20,7 @@ describe('Pokedex Facade', () => {
   });
 
   describe('LoadPokemon', () => {
-    test('dispatches load action, padding down pokemon name', () => {
+    it('dispatches load action, padding down pokemon name', () => {
       const name = 'bulbasaur';
       facade.loadPokemon(name);
       expect(dispatch).toHaveBeenCalledWith(DetailsActions.load({ name }));
@@ -28,7 +28,7 @@ describe('Pokedex Facade', () => {
   });
 
   describe('List', () => {
-    test('returns list from Store', () => {
+    it('returns list from Store', () => {
       const list = [ { id: 1 } ] as PokemonSummary[];
       setSummaryStore(list);
       expect(facade.list()).toBeObservable(hot('a', { a: list }));
@@ -36,7 +36,7 @@ describe('Pokedex Facade', () => {
   });
 
   describe('Pokemon', () => {
-    test('returns selected pokemon information', () => {
+    it('returns selected pokemon information', () => {
       const pokemon = { id: 1 } as PokemonDetails;
       setDetailsStore(pokemon);
       expect(facade.pokemon()).toBeObservable(hot('a', { a : pokemon }));
@@ -44,36 +44,36 @@ describe('Pokedex Facade', () => {
   });
 
   describe('IsListLoading', () => {
-    test('returns true when status is loading', () => {
+    it('returns true when status is loading', () => {
       setSummaryStore([], ProcessStatus.loading);
       expect(facade.isListLoading()).toBeObservable(hot('a', { a: true }));
     });
 
-    test('returns false when status is completed', () => {
+    it('returns false when status is completed', () => {
       setSummaryStore([], ProcessStatus.completed);
       expect(facade.isListLoading()).toBeObservable(hot('a', { a: false }));
     });
   });
 
   describe('isPokemonLoading', () => {
-    test('returns true when status is loading', () => {
+    it('returns true when status is loading', () => {
       setDetailsStore(null, ProcessStatus.loading);
       expect(facade.isPokemonLoading()).toBeObservable(hot('a', { a: true }));
     });
 
-    test('returns false when status is completed', () => {
+    it('returns false when status is completed', () => {
       setDetailsStore(null, ProcessStatus.completed);
       expect(facade.isPokemonLoading()).toBeObservable(hot('a', { a: false }));
     });
   });
 
   describe('isPokemonError', () => {
-    test('returns true when status is failed', () => {
+    it('returns true when status is failed', () => {
       setDetailsStore(null, ProcessStatus.failed);
       expect(facade.isPokemonError()).toBeObservable(hot('a', { a: true }));
     });
 
-    test('returns false when status is completed', () => {
+    it('returns false when status is completed', () => {
       setDetailsStore(null, ProcessStatus.completed);
       expect(facade.isPokemonError()).toBeObservable(hot('a', { a: false }));
     });

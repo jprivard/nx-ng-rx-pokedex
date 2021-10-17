@@ -5,7 +5,7 @@ import { initialState, reducer } from './summary.reducer';
 
 describe('Summary Reducer', () => {
   describe('Load', () => {
-    test('sets the process status to loading and empty the list', () => {
+    it('sets the process status to loading and empty the list', () => {
       const state = { ...initialState, list: [ { id: 1 } as PokemonSummary ] };
       const result = reducer(state, SummaryActions.load({ size: 10, page: 0 }));
       expect(result.list.length).toEqual(0);
@@ -14,7 +14,7 @@ describe('Summary Reducer', () => {
   });
 
   describe('Loaded', () => {
-    test('sets the new list in the store and the process status to completed', () => {
+    it('sets the new list in the store and the process status to completed', () => {
       const list = [ { id: 1} ] as PokemonSummary[];
       const result = reducer({ ...initialState }, SummaryActions.loaded({ list }));
       expect(result.list.length).toEqual(1);
@@ -23,7 +23,7 @@ describe('Summary Reducer', () => {
   });
 
   describe('Failed', () => {
-    test('sets the process status as failed', () => {
+    it('sets the process status as failed', () => {
       const error = new Error();
       const state = { ...initialState, list: [ { id: 1 } as PokemonSummary ] };
       const result = reducer(state, SummaryActions.failed({ error }));

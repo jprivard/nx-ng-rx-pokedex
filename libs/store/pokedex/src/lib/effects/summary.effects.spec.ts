@@ -12,7 +12,7 @@ import { pokemonSummary } from '../fixtures/pokemon-summary.fixture';
 
 describe('Summary Effects', () => {
   describe('Load', () => {
-    test('calls the service to get list, individual items and factory to return PokemonSummary[]', () => {
+    it('calls the service to get list, individual items and factory to return PokemonSummary[]', () => {
       service.load
         .mockReturnValue(of(fixture.list));
       service.getPokemonSummary
@@ -24,7 +24,7 @@ describe('Summary Effects', () => {
       expect(effects.load$).toBeObservable(expected);
     });
 
-    test('returns failed when list call throws exception', () => {
+    it('returns failed when list call throws exception', () => {
       const error = new Error('error');
       service.load.mockReturnValue(throwError(error));
       actions = hot('--a-', { a: SummaryActions.load({ size: 10, page: 0 }) });
@@ -32,7 +32,7 @@ describe('Summary Effects', () => {
       expect(effects.load$).toBeObservable(expected);
     });
 
-    test('returns failed when one of the individual call throws exception', () => {
+    it('returns failed when one of the individual call throws exception', () => {
       const error = new Error('error');
       service.load.mockReturnValue(of(fixture.list));
       service.getPokemonSummary.mockReturnValue(throwError(error));

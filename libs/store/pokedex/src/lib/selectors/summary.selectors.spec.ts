@@ -5,7 +5,7 @@ import * as queries from './summary.selectors';
 
 describe('Summary Selectors', () => {
   describe('selectList', () => {
-    test('returns the list of pokemons by ID ascending', () => {
+    it('returns the list of pokemons by ID ascending', () => {
       expect(queries.selectList.projector({ ...initialState })).toEqual([]);
       const result = queries.selectList.projector(aStateContaining(pokemons));
       expect(result.length).toBe(pokemons.length);
@@ -14,7 +14,7 @@ describe('Summary Selectors', () => {
   });
 
   describe('selectLoading', () => {
-    test('returns boolean if status is loading', () => {
+    it('returns boolean if status is loading', () => {
       expect(queries.selectLoading.projector({ ...initialState })).toEqual(false);
       expect(queries.selectLoading.projector(aStateWithProcess(ProcessStatus.normal))).toBe(false);
       expect(queries.selectLoading.projector(aStateWithProcess(ProcessStatus.loading))).toBe(true);
