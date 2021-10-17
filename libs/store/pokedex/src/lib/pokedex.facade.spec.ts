@@ -67,6 +67,18 @@ describe('Pokedex Facade', () => {
     });
   });
 
+  describe('isPokemonError', () => {
+    test('returns true when status is failed', () => {
+      setDetailsStore(null, ProcessStatus.failed);
+      expect(facade.isPokemonError()).toBeObservable(hot('a', { a: true }));
+    });
+
+    test('returns false when status is completed', () => {
+      setDetailsStore(null, ProcessStatus.completed);
+      expect(facade.isPokemonError()).toBeObservable(hot('a', { a: false }));
+    });
+  });
+
   let facade: PokedexFacade;
   let store: MockStore<fromPokedex.State>;
   let dispatch: jest.SpyInstance;

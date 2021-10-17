@@ -22,6 +22,16 @@ describe('Details Selectors', () => {
     });
   });
 
+  describe('selectError', () => {
+    test('returns boolean if status is in error', () => {
+      expect(queries.selectError.projector({ ...initialState })).toEqual(false);
+      expect(queries.selectError.projector(aStateWithProcess(ProcessStatus.normal))).toBe(false);
+      expect(queries.selectError.projector(aStateWithProcess(ProcessStatus.loading))).toBe(false);
+      expect(queries.selectError.projector(aStateWithProcess(ProcessStatus.failed))).toBe(true);
+      expect(queries.selectError.projector(aStateWithProcess(ProcessStatus.completed))).toBe(false);
+    });
+  });
+
   const pokemon = { id: 1 } as PokemonDetails;
 
   const aStateContaining = (pokemon: PokemonDetails): State =>  ({ ...initialState, pokemon });

@@ -34,4 +34,8 @@ export class PokedexFacade {
   public isPokemonLoading(): Observable<boolean> {
     return this.store.select(queries.details.selectLoading);
   }
+
+  public isPokemonError(): Observable<boolean> {
+    return this.store.select(queries.details.selectError);
+  }
 }
