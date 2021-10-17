@@ -8,7 +8,6 @@ import { fixtures, PokedexFacade } from '@pokedex/store/pokedex';
 import { EntryPage } from './entry.page';
 import { PokemonDetails } from '@pokedex/store/pokedex';
 import { ActivatedRoute } from '@angular/router';
-import { ResourceLoader } from '@angular/compiler';
 
 describe('Entry Page', () => {
   it('creates the entry page', () => {

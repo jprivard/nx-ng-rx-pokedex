@@ -9,6 +9,7 @@
     "build": "nx build",
     "analyze": "nx build --prod --stats-json; webpack-bundle-analyzer ./dist/apps/pokedex/stats.json",
     "test": "nx run-many affected --target=test --all --code-coverage",
+    "lint": "nx run-many affected --target=lint --all",
     "coverage": "http-server ./coverage/",
     "dep-graph": "nx dep-graph"
   },

@@ -1,4 +1,4 @@
-import { EvolutionChainApiResponse } from '@pokedex/api-interfaces';
+import { EvolutionChainApiResponse } from '../interfaces/evolution-chain.interface';
 
 export const chain = [
   {

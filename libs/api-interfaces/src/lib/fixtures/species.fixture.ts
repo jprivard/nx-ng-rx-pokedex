@@ -1,4 +1,4 @@
-import { SpeciesApiResponse } from '@pokedex/api-interfaces';
+import { SpeciesApiResponse } from '../interfaces/species.interface';
 
 export const species = [
   {
