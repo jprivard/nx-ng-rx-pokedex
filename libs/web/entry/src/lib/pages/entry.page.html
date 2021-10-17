@@ -1,9 +1,8 @@
 <mat-card>
-  <mat-card-header>
-    <mat-card-title>Bleh</mat-card-title>
-  </mat-card-header>
-  <mat-card-content style="position: relative;min-height: 250px;">
+  <pokedex-header [pokemon]="pokemon$ | async"></pokedex-header>
+  <mat-card-content>
     <pokedex-spinner *ngIf="isLoading$ | async"></pokedex-spinner>
-    <div>Noice</div>
+    <pokedex-not-found *ngIf="isError$ | async"></pokedex-not-found>
+    <pokedex-layout *ngIf="pokemon$ | async" [pokemon]="(pokemon$ | async)!"></pokedex-layout>
   </mat-card-content>
 </mat-card>
