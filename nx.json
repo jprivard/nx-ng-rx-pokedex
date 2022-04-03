@@ -15,7 +15,8 @@
       "runner": "@nrwl/nx-cloud",
       "options": {
         "cacheableOperations": ["build", "lint", "test", "e2e"],
-        "accessToken": "MzQ1ODJhYzgtNmY1NC00OGRhLTk3MzAtYmFiOWViZmJkOTBmfHJlYWQtd3JpdGU="
+        "accessToken": "MzQ1ODJhYzgtNmY1NC00OGRhLTk3MzAtYmFiOWViZmJkOTBmfHJlYWQtd3JpdGU=",
+        "parallel": 2
       }
     }
   },
@@ -27,27 +28,36 @@
       }
     ]
   },
-  "projects": {
-    "api-interfaces": {
-      "tags": []
+  "cli": {
+    "analytics": false,
+    "defaultCollection": "@nrwl/angular",
+    "packageManager": "npm"
+  },
+  "defaultProject": "pokedex",
+  "generators": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
     },
-    "pokedex": {
-      "tags": []
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
     },
-    "spec-helpers": {
-      "tags": []
+    "@nrwl/angular:library": {
+      "linter": "eslint",
+      "unitTestRunner": "jest"
     },
-    "store-pokedex": {
-      "tags": []
-    },
-    "web-entry": {
-      "tags": []
-    },
-    "web-list": {
-      "tags": []
-    },
-    "web-spinner": {
-      "tags": []
+    "@nrwl/angular:component": {
+      "style": "scss"
     }
   }
 }
