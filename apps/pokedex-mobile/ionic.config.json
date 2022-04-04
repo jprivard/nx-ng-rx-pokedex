@@ -1,0 +1,7 @@
+{
+  "name": "pokedex-mobile",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
