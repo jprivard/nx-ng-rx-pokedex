@@ -1,34 +1,27 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ComponentInspector } from '@pokedex/spec-helpers';
+import { createComponentFactory, Spectator, byTestId } from '@ngneat/spectator';
 import { SpinnerComponent } from './spinner.component';
 
 describe('Spinner Component', () => {
   it('creates the spinner component', () => {
-    expect(component).toBeTruthy();
+    expect(spectator).toBeTruthy();
   });
 
   it('has the proper element structure', () => {
-    expect(element.spinner()).toBeTruthy();
+    expect(spectator.query(byTestId('pokeball'))).toBeTruthy();
   });
 
-  let fixture: ComponentFixture<SpinnerComponent>;
-  let component: SpinnerComponent;
-  let element: ComponentDSL<SpinnerComponent>;
+  let spectator: Spectator<SpinnerComponent>;
+
+  const createComponent = createComponentFactory({
+    component: SpinnerComponent,
+    shallow: true,
+  });
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ SpinnerComponent ],
-    }).compileComponents();
-    fixture = TestBed.createComponent(SpinnerComponent);
-    component = fixture.componentInstance;
-    element = new ComponentDSL<SpinnerComponent>(fixture);
+    spectator = createComponent();
   });
 
   afterAll(() => {
     jest.restoreAllMocks();
   });
 });
-
-class ComponentDSL<T> extends ComponentInspector<T> {
-  spinner = () => this.element('.pokeball .pokeball__button');
-}

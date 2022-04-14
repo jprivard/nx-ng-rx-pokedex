@@ -12,6 +12,7 @@ import {
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting,
 } from '@angular/platform-browser-dynamic/testing';
+import { ngMocks } from 'ng-mocks';
 
 getTestBed().resetTestEnvironment();
 getTestBed().initTestEnvironment(
@@ -19,3 +20,5 @@ getTestBed().initTestEnvironment(
   platformBrowserDynamicTesting(),
   { teardown: { destroyAfterEach: false } }
 );
+
+ngMocks.autoSpy('jest');

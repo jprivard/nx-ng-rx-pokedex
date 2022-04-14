@@ -27,11 +27,13 @@
     "@angular/router": "13.2.7",
     "@capacitor/core": "^3.2.5",
     "@ionic/angular": "^5.8.3",
+    "@ngneat/spectator": "^10.0.1",
     "@ngrx/effects": "13.0.2",
     "@ngrx/store": "13.0.2",
     "@ngrx/store-devtools": "13.0.2",
     "@nrwl/angular": "13.9.6",
     "jest-marbles": "^3.0.1",
+    "ng-mocks": "^13.4.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "0.11.5"

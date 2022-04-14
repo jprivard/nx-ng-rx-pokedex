@@ -1,39 +1,34 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ComponentInspector } from '@pokedex/spec-helpers';
+import { createComponentFactory, Spectator, byTestId } from '@ngneat/spectator';
 import { ReformatPipe } from '../../pipes/reformat.pipe';
 import { AbilitiesComponent } from './abilities.component';
 
 describe('Abilities Component', () => {
   it('creates the abilities component', () => {
-    expect(component).toBeTruthy();
+    expect(spectator).toBeTruthy();
   });
 
   it('shows as many list item as there are abilities', () => {
-    component.abilities = ['hp', 'special-attack'];
-    fixture.detectChanges();
-    expect(element.item().length).toEqual(2);
-    expect(element.item()[0]).toContain('HP');
-    expect(element.item()[1]).toContain('Special Attack');
+    spectator.component.abilities = ['hp', 'special-attack'];
+    spectator.detectChanges();
+    const items = spectator.queryAll(byTestId('item'));
+    expect(items.length).toEqual(2);
+    expect(items[0].innerHTML).toContain('HP');
+    expect(items[1].innerHTML).toContain('Special Attack');
   });
 
-  let fixture: ComponentFixture<AbilitiesComponent>;
-  let component: AbilitiesComponent;
-  let element: ComponentDSL<AbilitiesComponent>;
+  let spectator: Spectator<AbilitiesComponent>;
+
+  const createComponent = createComponentFactory({
+    component: AbilitiesComponent,
+    shallow: true,
+    declarations: [ReformatPipe]
+  });
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ AbilitiesComponent, ReformatPipe ],
-    }).compileComponents();
-    fixture = TestBed.createComponent(AbilitiesComponent);
-    component = fixture.componentInstance;
-    element = new ComponentDSL<AbilitiesComponent>(fixture);
+    spectator = createComponent();
   });
 
   afterAll(() => {
     jest.restoreAllMocks();
   });
 });
-
-class ComponentDSL<T> extends ComponentInspector<T> {
-  item = () => this.queryAll('ul li').map(i => i.nativeElement.innerHTML);
-}
