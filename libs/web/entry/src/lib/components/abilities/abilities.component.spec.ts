@@ -4,28 +4,29 @@ import { AbilitiesComponent } from './abilities.component';
 
 describe('Abilities Component', () => {
   it('creates the abilities component', () => {
-    expect(spectator).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
   it('shows as many list item as there are abilities', () => {
     spectator.component.abilities = ['hp', 'special-attack'];
     spectator.detectChanges();
-    const items = spectator.queryAll(byTestId('item'));
-    expect(items.length).toEqual(2);
-    expect(items[0].innerHTML).toContain('HP');
-    expect(items[1].innerHTML).toContain('Special Attack');
+    expect(elements.items().length).toEqual(2);
+    expect(elements.items()[0].innerHTML).toContain('HP');
+    expect(elements.items()[1].innerHTML).toContain('Special Attack');
   });
 
   let spectator: Spectator<AbilitiesComponent>;
-
+  let component: AbilitiesComponent;
   const createComponent = createComponentFactory({
     component: AbilitiesComponent,
     shallow: true,
     declarations: [ReformatPipe]
   });
+  const elements = { items: () => spectator.queryAll(byTestId('item')) };
 
   beforeEach(async () => {
     spectator = createComponent();
+    component = spectator.component;
   });
 
   afterAll(() => {

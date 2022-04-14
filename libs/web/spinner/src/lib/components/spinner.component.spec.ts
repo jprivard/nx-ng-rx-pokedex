@@ -3,22 +3,21 @@ import { SpinnerComponent } from './spinner.component';
 
 describe('Spinner Component', () => {
   it('creates the spinner component', () => {
-    expect(spectator).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
   it('has the proper element structure', () => {
-    expect(spectator.query(byTestId('pokeball'))).toBeTruthy();
+    expect(elements.pokeball()).toBeTruthy();
   });
 
   let spectator: Spectator<SpinnerComponent>;
-
-  const createComponent = createComponentFactory({
-    component: SpinnerComponent,
-    shallow: true,
-  });
+  let component: SpinnerComponent;
+  const elements = { pokeball: () => spectator.query(byTestId('pokeball')) };
+  const createComponent = createComponentFactory({ component: SpinnerComponent, shallow: true });
 
   beforeEach(async () => {
     spectator = createComponent();
+    component = spectator.component;
   });
 
   afterAll(() => {

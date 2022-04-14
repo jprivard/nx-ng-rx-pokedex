@@ -1,6 +1,6 @@
 import { BehaviorSubject, of } from 'rxjs';
-import { createComponentFactory, mockProvider, Spectator } from '@ngneat/spectator/jest';
-import { MockComponents, MockProvider, MockProviders } from 'ng-mocks';
+import { createComponentFactory, Spectator } from '@ngneat/spectator/jest';
+import { MockComponents, MockProvider } from 'ng-mocks';
 import { fixtures, PokedexFacade } from '@pokedex/store/pokedex';
 import { EntryPage } from './entry.page';
 import { PokemonDetails } from '@pokedex/store/pokedex';
@@ -8,50 +8,58 @@ import { SpinnerComponent } from 'libs/web/spinner/src/lib/components/spinner.co
 import { LayoutComponent } from '../components/layout/layout.component';
 import { NotFoundComponent } from '../components/not-found/not-found.component';
 import { HeaderComponent } from '../components/header/header.component';
-import { ActivatedRoute, ActivationEnd } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 describe('Entry Page', () => {
   it('creates the entry page', () => {
-    expect(spectator).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
   it('displays a spinner when the pokemon is loading', () => {
     loading.next(true);
     spectator.detectChanges();
-    expect(spectator.query(SpinnerComponent)).toBeTruthy();
-    expect(spectator.query(LayoutComponent)).toBeFalsy();
-    expect(spectator.query(NotFoundComponent)).toBeFalsy();
+    expect(elements.spinner()).toBeTruthy();
+    expect(elements.layout()).toBeFalsy();
+    expect(elements.notFound()).toBeFalsy();
   });
 
   it('does not display a spinner when the pokemon load is completed', () => {
     loading.next(false);
     spectator.detectChanges();
-    expect(spectator.query(SpinnerComponent)).toBeFalsy();
+    expect(elements.spinner()).toBeFalsy();
   });
 
   it('displays a not found component when there was an error', () => {
     error.next(true);
     spectator.detectChanges();
-    expect(spectator.query(NotFoundComponent)).toBeTruthy();
+    expect(elements.notFound()).toBeTruthy();
   });
 
   it('sends the Pokemon to the Layout and Header components', () => {
     pokemon.next(fixtures.details[0]);
     spectator.detectChanges();
-    expect(spectator.query(LayoutComponent)).toBeTruthy();
-    expect(spectator.query(LayoutComponent)!.pokemon).toEqual(fixtures.details[0]);
-    expect(spectator.query(HeaderComponent)).toBeTruthy();
-    expect(spectator.query(HeaderComponent)!.pokemon).toEqual(fixtures.details[0]);
+    expect(elements.layout()).toBeTruthy();
+    expect(elements.layout().pokemon).toEqual(fixtures.details[0]);
+    expect(elements.header()).toBeTruthy();
+    expect(elements.header().pokemon).toEqual(fixtures.details[0]);
   });
 
   it('asks the facade to load the details on startup', () => {
-    expect(spectator.inject(PokedexFacade).loadPokemon).toHaveBeenCalledWith('bulbasaur');
+    expect(elements.facade().loadPokemon).toHaveBeenCalledWith('bulbasaur');
   });
 
   let spectator: Spectator<EntryPage>;
+  let component: EntryPage;
   const pokemon = new BehaviorSubject<PokemonDetails | null>(null);
   const loading = new BehaviorSubject<boolean>(false);
   const error = new BehaviorSubject<boolean>(false);
+  const elements = {
+    facade: () => spectator.inject(PokedexFacade),
+    header: () => spectator.query(HeaderComponent)!,
+    layout: () => spectator.query(LayoutComponent)!,
+    notFound: () => spectator.query(NotFoundComponent)!,
+    spinner: () => spectator.query(SpinnerComponent)!,
+  }
 
   const createComponent = createComponentFactory({
     component: EntryPage,
@@ -63,7 +71,7 @@ describe('Entry Page', () => {
         isPokemonLoading: () => loading.asObservable(),
         isPokemonError: () => error.asObservable(),
       }),
-      { provide: ActivatedRoute, useValue: { params: of({ id: 'bulbasaur' }) } },
+      MockProvider(ActivatedRoute, { params: of({ id: 'bulbasaur' }) })
     ],
   });
 
@@ -72,6 +80,7 @@ describe('Entry Page', () => {
     error.next(false);
     pokemon.next(null);
     spectator = createComponent();
+    component = spectator.component;
   });
 
   afterAll(() => {

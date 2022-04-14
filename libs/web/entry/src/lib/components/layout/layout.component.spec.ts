@@ -10,51 +10,69 @@ import { SpeciesComponent } from '../species/species.component';
 
 describe('Layout Component', () => {
   it('creates the layout component', () => {
-    expect(spectator).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
   it('instantiates the quote component', () => {
-    expect(spectator.query(QuoteComponent)).toBeTruthy();
-    expect(spectator.query(QuoteComponent)!.quotes).toEqual(spectator.component.pokemon!.flavor_text_entries);
+    expect(elements.quote()).toBeTruthy();
+    expect(elements.quote().quotes).toEqual(component.pokemon!.flavor_text_entries);
   });
 
   it('instantiates the stats component', () => {
-    expect(spectator.query(StatsComponent)).toBeTruthy();
-    expect(spectator.query(StatsComponent)!.pokemon).toEqual(spectator.component.pokemon);
+    expect(elements.stats()).toBeTruthy();
+    expect(elements.stats().pokemon).toEqual(component.pokemon);
   });
 
   it('displays the pokemon sprite', () => {
-    expect(spectator.query(byTestId('image'))!.getAttribute('src')).toBe(spectator.component.pokemon!.sprite);
+    expect(elements.image().getAttribute('src')).toBe(component.pokemon!.sprite);
   });
 
   it('instantiates the types component', () => {
-    expect(spectator.query(TypesComponent)).toBeTruthy();
-    expect(spectator.query(TypesComponent)!.types).toEqual(spectator.component.pokemon!.types);
-    expect(spectator.query(byTestId('types-title'))!.innerHTML).toContain('Types');
+    expect(elements.types.component()).toBeTruthy();
+    expect(elements.types.component().types).toEqual(component.pokemon!.types);
+    expect(elements.types.title().innerHTML).toContain('Types');
   });
 
   it('instantiates the abilities component', () => {
-    expect(spectator.query(AbilitiesComponent)).toBeTruthy();
-    expect(spectator.query(AbilitiesComponent)!.abilities).toEqual(spectator.component.pokemon!.abilities);
-    expect(spectator.query(byTestId('abilities-title'))!.innerHTML).toContain('Abilities');
+    expect(elements.abilities.component()).toBeTruthy();
+    expect(elements.abilities.component().abilities).toEqual(component.pokemon!.abilities);
+    expect(elements.abilities.title().innerHTML).toContain('Abilities');
   });
 
   it('instantiates the species component', () => {
-    expect(spectator.query(SpeciesComponent)).toBeTruthy();
-    expect(spectator.query(SpeciesComponent)!.chain).toEqual(spectator.component.pokemon!.evolution_chain);
-    expect(spectator.query(byTestId('evo-title'))!.innerHTML).toContain('Evolution Chain');
+    expect(elements.evolution.component()).toBeTruthy();
+    expect(elements.evolution.component().chain).toEqual(component.pokemon!.evolution_chain);
+    expect(elements.evolution.title().innerHTML).toContain('Evolution Chain');
   });
 
   let spectator: Spectator<LayoutComponent>;
-
+  let component: LayoutComponent;
   const createComponent = createComponentFactory({
     component: LayoutComponent,
     declarations: [ MockComponents(QuoteComponent, StatsComponent, TypesComponent, AbilitiesComponent, SpeciesComponent) ],
     shallow: true,
   });
+  const elements = {
+    abilities: {
+      component: () => spectator.query(AbilitiesComponent)!,
+      title: () => spectator.query(byTestId('abilities-title'))!,
+    },
+    evolution: {
+      component: () => spectator.query(SpeciesComponent)!,
+      title: () => spectator.query(byTestId('evo-title'))!,
+    },
+    types: {
+      component: () => spectator.query(TypesComponent)!,
+      title: () => spectator.query(byTestId('types-title'))!,
+    },
+    image: () => spectator.query(byTestId('image'))!,
+    stats: () => spectator.query(StatsComponent)!,
+    quote: () => spectator.query(QuoteComponent)!,
+  }
 
   beforeEach(() => {
     spectator = createComponent({ props: { pokemon: fixtures.details[0] }});
+    component = spectator.component;
   });
 
   afterAll(() => {
