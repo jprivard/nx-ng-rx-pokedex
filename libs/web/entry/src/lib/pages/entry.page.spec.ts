@@ -1,12 +1,13 @@
 import { BehaviorSubject, of } from 'rxjs';
-import { Component, Input } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatCardModule } from '@angular/material/card';
-
-import { ComponentInspector } from '@pokedex/spec-helpers';
+import { createComponentFactory, Spectator } from '@ngneat/spectator/jest';
+import { MockComponents, MockProvider } from 'ng-mocks';
 import { fixtures, PokedexFacade } from '@pokedex/store/pokedex';
 import { EntryPage } from './entry.page';
 import { PokemonDetails } from '@pokedex/store/pokedex';
+import { SpinnerComponent } from 'libs/web/spinner/src/lib/components/spinner.component';
+import { LayoutComponent } from '../components/layout/layout.component';
+import { NotFoundComponent } from '../components/not-found/not-found.component';
+import { HeaderComponent } from '../components/header/header.component';
 import { ActivatedRoute } from '@angular/router';
 
 describe('Entry Page', () => {
@@ -16,91 +17,73 @@ describe('Entry Page', () => {
 
   it('displays a spinner when the pokemon is loading', () => {
     loading.next(true);
-    fixture.detectChanges();
-    expect(element.spinner()).toBeTruthy();
-    expect(element.layout()).toBeFalsy();
-    expect(element.notFound()).toBeFalsy();
+    spectator.detectChanges();
+    expect(elements.spinner()).toBeTruthy();
+    expect(elements.layout()).toBeFalsy();
+    expect(elements.notFound()).toBeFalsy();
   });
 
   it('does not display a spinner when the pokemon load is completed', () => {
     loading.next(false);
-    fixture.detectChanges();
-    expect(element.spinner()).toBeFalsy();
+    spectator.detectChanges();
+    expect(elements.spinner()).toBeFalsy();
   });
 
   it('displays a not found component when there was an error', () => {
     error.next(true);
-    fixture.detectChanges();
-    expect(element.notFound()).toBeTruthy();
-  })
+    spectator.detectChanges();
+    expect(elements.notFound()).toBeTruthy();
+  });
 
   it('sends the Pokemon to the Layout and Header components', () => {
     pokemon.next(fixtures.details[0]);
-    fixture.detectChanges();
-    expect(element.layout()).toBeTruthy();
-    expect(element.layout().pokemon).toEqual(fixtures.details[0]);
-    expect(element.header()).toBeTruthy();
-    expect(element.header().pokemon).toEqual(fixtures.details[0]);
+    spectator.detectChanges();
+    expect(elements.layout()).toBeTruthy();
+    expect(elements.layout().pokemon).toEqual(fixtures.details[0]);
+    expect(elements.header()).toBeTruthy();
+    expect(elements.header().pokemon).toEqual(fixtures.details[0]);
   });
 
   it('asks the facade to load the details on startup', () => {
-    expect(facade.loadPokemon).toHaveBeenCalledWith('bulbasaur');
+    expect(elements.facade().loadPokemon).toHaveBeenCalledWith('bulbasaur');
   });
 
-  let fixture: ComponentFixture<EntryPage>;
+  let spectator: Spectator<EntryPage>;
   let component: EntryPage;
-  let element: ComponentDSL<EntryPage>;
   const pokemon = new BehaviorSubject<PokemonDetails | null>(null);
   const loading = new BehaviorSubject<boolean>(false);
   const error = new BehaviorSubject<boolean>(false);
-  const facade = {
-    loadPokemon: jest.fn(),
-    pokemon: jest.fn().mockReturnValue(pokemon.asObservable()),
-    isPokemonLoading: jest.fn().mockReturnValue(loading.asObservable()),
-    isPokemonError: jest.fn().mockReturnValue(error.asObservable()),
-  };
+  const elements = {
+    facade: () => spectator.inject(PokedexFacade),
+    header: () => spectator.query(HeaderComponent)!,
+    layout: () => spectator.query(LayoutComponent)!,
+    notFound: () => spectator.query(NotFoundComponent)!,
+    spinner: () => spectator.query(SpinnerComponent)!,
+  }
+
+  const createComponent = createComponentFactory({
+    component: EntryPage,
+    shallow: true,
+    declarations: [ MockComponents(SpinnerComponent, LayoutComponent, NotFoundComponent, HeaderComponent) ],
+    providers: [ 
+      MockProvider(PokedexFacade, {
+        pokemon: () => pokemon.asObservable(),
+        isPokemonLoading: () => loading.asObservable(),
+        isPokemonError: () => error.asObservable(),
+      }),
+      MockProvider(ActivatedRoute, { params: of({ id: 'bulbasaur' }) })
+    ],
+  });
 
   beforeEach(async () => {
     loading.next(false);
     error.next(false);
     pokemon.next(null);
-    await TestBed.configureTestingModule({
-      declarations: [ EntryPage, SpinnerComponent, LayoutComponent, NotFoundComponent, HeaderComponent ],
-      imports: [ MatCardModule ],
-      providers: [
-        { provide: PokedexFacade, useValue: facade },
-        { provide: ActivatedRoute, useValue: { params: of({ id: 'bulbasaur' }) } },
-      ]
-    }).compileComponents();
-    fixture = TestBed.createComponent(EntryPage);
-    component = fixture.componentInstance;
-    element = new ComponentDSL<EntryPage>(fixture);
+    spectator = createComponent();
+    component = spectator.component;
   });
 
   afterAll(() => {
     jest.restoreAllMocks();
   });
 });
-
-@Component({ selector: 'pokedex-spinner' })
-class SpinnerComponent {}
-
-@Component({ selector: 'pokedex-not-found' })
-class NotFoundComponent {}
-
-@Component({ selector: 'pokedex-layout' })
-class LayoutComponent {
-  @Input() pokemon: PokemonDetails | null = null;
-}
-
-@Component({ selector: 'pokedex-header' })
-class HeaderComponent {
-  @Input() pokemon: PokemonDetails | null = null;
-}
-
-class ComponentDSL<T> extends ComponentInspector<T> {
-  spinner = () => this.getComponent<SpinnerComponent>('pokedex-spinner', SpinnerComponent);
-  layout = () => this.getComponent<LayoutComponent>('pokedex-layout', LayoutComponent);
-  header = () => this.getComponent<HeaderComponent>('pokedex-header', HeaderComponent);
-  notFound = () => this.getComponent<NotFoundComponent>('pokedex-not-found', NotFoundComponent);
-}

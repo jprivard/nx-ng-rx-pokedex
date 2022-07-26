@@ -3,17 +3,17 @@
   <pokedex-stats [pokemon]="pokemon!"></pokedex-stats>
 </div>
 <div class="card">
-  <img [src]="pokemon!.sprite"/>
+  <img [src]="pokemon!.sprite" data-testid="image"/>
   <div class="types">
-    <div class="title">Types</div>
+    <div class="title" data-testid="types-title">Types</div>
     <pokedex-types [types]="pokemon!.types"></pokedex-types>
   </div>
   <div class="abilities">
-    <div class="title">Abilities</div>
+    <div class="title" data-testid="abilities-title">Abilities</div>
     <pokedex-abilities [abilities]="pokemon!.abilities"></pokedex-abilities>
   </div>
   <div class="chain">
-    <div class="title">Evolution Chain</div>
+    <div class="title" data-testid="evo-title">Evolution Chain</div>
     <pokedex-evo-species class="first"
       [current]="pokemon!.name"
       [chain]="pokemon!.evolution_chain"
